@@ -10,23 +10,23 @@ class PageController extends Controller
     
 
 
-    public function index(Request $request){
-        return view('welcome');
-    }
+    // public function index(Request $request){
+    //     return view('welcome');
+    // }
 
-    public function about(Request $request){
-        return view('about');
-    }
+    // public function about(Request $request){
+    //     return view('about');
+    // }
 
-     public function service(Request $request){
-        return view('services');
-    }
+    //  public function service(Request $request){
+    //     return view('services');
+    // }
 
 
 
-     public function contact(Request $request){
-        return view('contact');
-    }
+    //  public function contact(Request $request){
+    //     return view('contact');
+    // }
 
 
 
