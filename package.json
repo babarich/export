@@ -30,6 +30,8 @@
         "@fortawesome/free-regular-svg-icons": "^6.7.1",
         "@fortawesome/free-solid-svg-icons": "^6.7.1",
         "@fortawesome/vue-fontawesome": "^3.0.8",
+        "@inertiajs/inertia-vue3": "^0.6.0",
+        "@heroicons/vue": "^2.0.18",
         "@headlessui/vue": "^1.7.23",
         "chart.js": "^4.3.0",
         "heroicons": "^2.0.18"
