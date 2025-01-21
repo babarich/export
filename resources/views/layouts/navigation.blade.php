@@ -13,14 +13,14 @@
     </div>
     <!-- Responsive Menu -->
     <div
-        class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-slate-900 md:hidden"
+        class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-gray-200 md:hidden"
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'"
     >
-        <ul>
+        <ul class="space-x-6">
             <li>
                 <a
                     href="{{ route('cart.index') }}"
-                    class="relative flex items-center justify-between py-2 px-3 transition-colors hover:bg-slate-800"
+                    class="relative flex items-center justify-between py-2 px-3 transition-colors hover:text-red-800"
                 >
                     <div class="flex items-center">
                         <svg
@@ -54,7 +54,7 @@
                 <li x-data="{open: false}" class="relative">
                     <a
                         @click="open = !open"
-                        class="cursor-pointer flex justify-between items-center py-2 px-3 hover:bg-slate-800"
+                        class="cursor-pointer flex justify-between items-center py-2 px-3 hover:text-red-800"
                     >
               <span class="flex items-center">
                 <svg
@@ -197,11 +197,11 @@
     </div>
     <!--/ Responsive Menu -->
     <nav class="hidden md:block">
-        <ul class="grid grid-flow-col items-center">
+        <ul class="grid grid-flow-col items-center space-x-6">
             <li>
                 <a
                     href="{{ route('cart.index') }}"
-                    class="relative inline-flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
+                    class="relative inline-flex items-center py-navbar-item px-navbar-item hover:text-red-700"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -268,7 +268,7 @@
                         x-show="open"
                         x-transition
                         x-cloak
-                        class="absolute z-10 right-0 bg-slate-800 py-2 w-48"
+                        class="absolute z-10 right-0 bg-slate-800 py-2 w-48 space-x-6"
                     >
                         <li>
                             <a
@@ -346,7 +346,7 @@
                 <li>
                     <a
                         href="{{ route('login') }}"
-                        class="flex items-center py-navbar-item px-navbar-item hover:bg-slate-900"
+                        class="flex items-center py-navbar-item px-navbar-item hover:text-red-700"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

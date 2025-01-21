@@ -10,7 +10,7 @@ $categoryList = \App\Models\Category::getActiveAsTree();
         <section id="hero" class="mt-4 py-5">
       <!-- Flex Container -->
       <div
-        class="container flex flex-col-reverse items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0 md:flex-row"
+        class="container flex flex-col-reverse items-center px-4 mx-auto mt-4 space-y-0 md:space-y-0 md:flex-row"
       >
         <!-- Left item -->
         <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
@@ -20,17 +20,47 @@ $categoryList = \App\Models\Category::getActiveAsTree();
             Bring everyone together to get better products
           </h1>
           <p class="max-w-sm text-center text-darkGrayishBlue md:text-left">
-            Agrono Export makes it easy for business and other customers to order and get their products within early as possible
+            Mikese Export make it easy  for business and other customers to order and get their products within early as possible
           </p>
-         
+         <div class="mt-12">
+                <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
+                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
+            </div>
         </div>
         <!-- Image -->
         <div class="md:w-1/2">
-          <img src="img/illustration-intro.svg" alt="" />
+          <img class="object-contain h-5/6" src="{{asset('assets/images/ecom.png')}}" alt="" />
         </div>
       </div>
     </section>
 
+        <!-- features -->
+    <div class="container py-16">
+        <div class="w-11/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
+            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+                <img src="assets/images/icons/delivery-van.svg" alt="Delivery" class="w-12 h-12 object-contain">
+                <div>
+                    <h4 class="font-medium capitalize text-lg">Fast Delivery</h4>
+                    <p class="text-gray-500 text-sm">Order now to deliver</p>
+                </div>
+            </div>
+            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+                <img src="assets/images/icons/money-back.svg" alt="Delivery" class="w-12 h-12 object-contain">
+                <div>
+                    <h4 class="font-medium capitalize text-lg">Sell Products</h4>
+                    <p class="text-gray-500 text-sm">Easily sell products</p>
+                </div>
+            </div>
+            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+                <img src="assets/images/icons/service-hours.svg" alt="Delivery" class="w-12 h-12 object-contain">
+                <div>
+                    <h4 class="font-medium capitalize text-lg">24/7 Support</h4>
+                    <p class="text-gray-500 text-sm">Customer support</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./features -->
 
     <div class="flex flex-col md:w-1/2">
         <div>
