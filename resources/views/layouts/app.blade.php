@@ -88,7 +88,7 @@
           </div>
           <!-- Logo -->
           <div>
-           <h3 class="font-bold text-2xl leading-tight  hover:text-primary">Agrono Export</h3> 
+           <h3 class="font-bold text-2xl leading-tight  hover:text-primary">MIKESE Export</h3> 
           </div>
 
         </div>

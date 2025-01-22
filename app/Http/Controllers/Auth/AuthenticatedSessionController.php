@@ -26,11 +26,19 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
         Cart::moveCartItemsIntoDb();
+        $user = Auth::user();
+        
+        $user = Auth::user();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+    
+        if ($user && $user->is_admin) {
+            return redirect()->intended(route('dashboard'));
+        } else {
+           
+            return redirect()->intended(route('home'));
+        }
     }
 
     /**

@@ -62,7 +62,8 @@ $categoryList = \App\Models\Category::getActiveAsTree();
     </div>
     <!-- ./features -->
 
-    <div class="flex flex-col md:w-1/2">
+    <section class="w-11/12 container">
+<div class="flex flex-col md:w-1/2">
         <div>
 
         </div>
@@ -109,6 +110,8 @@ $categoryList = \App\Models\Category::getActiveAsTree();
         </div>
 
     </div>
+    </section>
+    
 
 
     <?php if ( $products->count() === 0 ): ?>

@@ -8,12 +8,12 @@
 >
     <div>
         <a href="{{ route('home') }}" class="block py-navbar-item pl-5"> 
-    <img src="assets/images/logo.svg" alt="Logo" class="w-32">        
-    </a>
+          <h3 class="font-bold text-2xl leading-tight">MIKESE</h3>       
+         </a>
     </div>
     <!-- Responsive Menu -->
     <div
-        class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-gray-200 md:hidden"
+        class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-gray-100 md:hidden"
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'"
     >
         <ul class="space-x-6">
@@ -89,10 +89,10 @@
                     <ul
                         x-show="open"
                         x-transition
-                        class="z-10 right-0 bg-slate-800 py-2"
+                        class="z-10 right-0 bg-gray-50 py-2 shadow-sm rounded-sm"
                     >
                         <li>
-                            <a href="{{ route('profile') }}" class="flex px-3 py-2 hover:bg-slate-900">
+                            <a href="{{ route('profile') }}" class="flex px-3 py-2 hover:text-red-900">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="h-5 w-5 mr-2"
@@ -110,10 +110,10 @@
                                 My Profile
                             </a>
                         </li>
-                        <li class="hover:bg-slate-900">
+                        <li class="hover:text-red-900">
                             <a
                                 href="{{ route('order.index') }}"
-                                class="flex items-center px-3 py-2 hover:bg-slate-900"
+                                class="flex items-center px-3 py-2 hover:text-red-900"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -132,13 +132,13 @@
                                 My Orders
                             </a>
                         </li>
-                        <li class="hover:bg-slate-900">
+                        <li class="hover:text-red-900">
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <a href="{{ route('logout') }}"
-                                   class="flex items-center px-3 py-2 hover:bg-slate-900"
+                                   class="flex items-center px-3 py-2 hover:text-red-900"
                                    onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                     <svg
@@ -231,7 +231,7 @@
                 <li x-data="{open: false}" class="relative">
                     <a
                         @click="open = !open"
-                        class="cursor-pointer flex items-center py-navbar-item px-navbar-item pr-5 hover:bg-slate-900"
+                        class="cursor-pointer flex items-center py-navbar-item px-navbar-item pr-5 hover:text-red-900"
                     >
               <span class="flex items-center">
                 <svg
@@ -250,30 +250,21 @@
                 </svg>
                 My Account
               </span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 ml-2"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
+                      <i class="fa fa-caret-down ml-2"></i>
                     </a>
                     <ul
                         @click.outside="open = false"
                         x-show="open"
                         x-transition
                         x-cloak
-                        class="absolute z-10 right-0 bg-slate-800 py-2 w-48 space-x-6"
+                        class="absolute z-10 right-0 bg-white border-t-[1px] space-x-6 rounded-b-[3px] py-5 px-[15px] w-[205px] shadow-sm mt-3.5 group-hover:mt-[5px]"
                     >
+                    <p class="text-sm leading-[18px] font-medium mb-4 text-secondary text-center">Welcome to
+                                MIKESE </p>
                         <li>
                             <a
                                 href="{{ route('profile') }}"
-                                class="flex px-3 py-2 hover:bg-slate-900"
+                                class="flex px-3 py-2 hover:text-red-900"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -295,7 +286,7 @@
                         <li>
                             <a
                                 href="{{ route('order.index') }}"
-                                class="flex px-3 py-2 hover:bg-slate-900"
+                                class="flex px-3 py-2 hover:text-red-900"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -319,7 +310,7 @@
                                 @csrf
 
                                 <a href="{{ route('logout') }}"
-                                   class="flex px-3 py-2 hover:bg-slate-900"
+                                   class="flex px-3 py-2 hover:text-red-900"
                                    onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                     <svg

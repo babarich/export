@@ -1,7 +1,28 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<x-app-layout>
+    <div class="bg-white w-[500px] mx-auto p-6 my-16 sm:rounded-lg">
+        <form method="POST" action="{{ route('register') }}"
+        >
         @csrf
 
+          <h2 class="text-2xl font-semibold text-center mb-4">Create an account</h2>
+        <p class="text-center text-gray-500 mb-3">
+            or
+            <a
+                href="{{ route('login') }}"
+                class="text-sm text-red-700 hover:text-red-600"
+            >
+                login with existing account
+            </a>
+        </p>
+
+        @if (session('error'))
+            <div class="py-2 px-3 bg-red-500 text-white mb-2 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')"/>
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -39,14 +60,15 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <div class="flex items-center justify-center mt-4">
+            <button
+            class="btn-primary bg-red-500 p-4 text-white hover:bg-red-600 active:bg-red-700 w-full"
+        >
+            Signup
+        </button>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
         </div>
-    </form>
-</x-guest-layout>
+    </form>        
+    </div>
+    
+</x-app-layout>
