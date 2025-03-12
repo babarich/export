@@ -129,7 +129,10 @@
                     <span class="text-sm text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
                   </div>
                   
-                 
+                 <div class="mt-4">
+                    <CustomInput type='checkbox' class="mb-2" label="Category Status" v-model="category.active"/>
+                    <span class="text-sm text-red-500" v-if="errors.active">{{errors.active[0]}}</span>
+                  </div>
                 
                 </div>
                 <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -174,7 +177,7 @@ const show = ref(false)
 
 const category = useForm({
   name: null,
-  business_unit_id:1
+  active:false
 })
 
 const errors = ref({})
@@ -205,7 +208,7 @@ const search = ref('')
 function onSubmit(){
 loading.value = true
 
-category.post(route('product.categoryStore'),{
+category.post(route('categories.store'),{
   onSuccess:()=>{
     loading.value= false
     closeModal();

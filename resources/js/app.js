@@ -3,6 +3,13 @@ import '../css/app.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
+import PrimeVue from "primevue/config";
+import ConfirmationService from "primevue/confirmationservice";
+import ToastService from "primevue/toastservice";
+import Tooltip from "primevue/tooltip"
+import "primevue/resources/primevue.min.css"
+import "primeicons/primeicons.css"
+import "primevue/resources/themes/lara-light-indigo/theme.css"
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
@@ -29,7 +36,11 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(PrimeVue)
+            .use(ConfirmationService)
+            .use(ToastService)
             .use(ZiggyVue)
+            .directive('tooltip', Tooltip)
             .component("font-awesome-icon", FontAwesomeIcon)
             .mount(el);
     },

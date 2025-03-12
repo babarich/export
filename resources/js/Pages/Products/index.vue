@@ -3,7 +3,7 @@
     
     <div class="flex justify-between mb-6">
         <div class="mt-2">
-            <h3 class="text-xl text-primary text-semibold">Products</h3>
+            <h3 class="text-xl text-primary text-bold">Products List</h3>
         </div>
         <div>
             <NButton @click="showModal()">
@@ -12,27 +12,36 @@
           
         </div>
     </div>
-    <div class="mt-4 mb-3 flex flex-col md:flex-row items-center justify-between">
-        <div>
-         <search-filter
-         v-model="search"
-         class="mr-4 w-full max-w-md mb-3">
-         </search-filter>
-        </div>
 
-        <div class="flex items-center space-x-2 divide-x">
-            <a :href="route('product.viewCategories', 1)" class="px-4 text-sm flex text-gray-700">
-              <ClipboardDocumentCheckIcon class="w-4 h-4 mr-2"/>  Categories
-            </a>
-            <button class="px-4 text-sm flex text-gray-700">
-              <ArrowUpTrayIcon class="w-4 h-4 mr-2"/>  Export
-            </button>
-            <button class="px-4 text-sm flex text-gray-700">
-               <FunnelIcon class="w-4 h-4 mr-2"/> Filter
-            </button>
-        </div>
-    </div>
+    <div class="rounded bg-white p-5 shadow md:p-8 w-full">
 
+
+            <div class="mt-4 mb-3 flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center space-x-2 divide-x">
+                   <a :href="route('product.viewCategories', 1)" class="px-4 text-sm flex text-gray-100 bg-secondary p-2 rounded">
+                      <ClipboardDocumentCheckIcon class="w-4 h-4 mr-2"/>  Categories
+                    </a>
+                    <button class="px-4 text-sm flex text-gray-100 bg-secondary p-2 rounded">
+                        <DocumentArrowDownIcon class="w-4 h-4 mr-2"/> Pdf
+                    </button>
+                    <button class="px-4 text-sm flex text-gray-100 bg-secondary p-2 rounded">
+                        <ArrowUpTrayIcon class="w-4 h-4 mr-2"/> Excel
+                    </button>
+                    <button class="px-4 text-sm flex text-gray-100 bg-secondary p-2 rounded">
+                        <FunnelIcon class="w-4 h-4 mr-2"/> Filter
+                    </button>
+                </div>
+                <div>
+                    <search-filter
+                        v-model="search"
+                        class="mr-4 w-full max-w-md mb-3">
+                    </search-filter>
+                </div>
+            </div>
+
+    
+ <Toast />
+ <ConfirmPopup group="positionDialog"></ConfirmPopup>
     <div class="bg-white relative overflow-x-auto mt-4">
         <table class="w-full text-sm whitespace-nowrap">
             <thead class="sticky top-0">
@@ -41,65 +50,112 @@
                 scope="col"
                 class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
                    S/N
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Image
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Product Name
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Category
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Quantity
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Buying Price
-                </th>     
-               <th
-                scope="col"
-                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
-                   Selling Price
-                </th>     
+                </th>   
+                 
+              <TableHeaderCell field="image" :sort-field="sortField" :sort-direction="sortDirection">
+                Image
+              </TableHeaderCell>
+              <TableHeaderCell field="title" :sort-field="sortField" :sort-direction="sortDirection"
+                              @click="sortProducts('title')">
+                Title
+              </TableHeaderCell>
+              <TableHeaderCell field="category">
+                Category
+              </TableHeaderCell>
+              <TableHeaderCell field="price" :sort-field="sortField" :sort-direction="sortDirection"
+                              @click="sortProducts('price')">
+                Price
+              </TableHeaderCell>
+              <TableHeaderCell field="quantity" :sort-field="sortField" :sort-direction="sortDirection"
+                              @click="sortProducts('quantity')">
+                Quantity
+              </TableHeaderCell>
+              <TableHeaderCell field="updated_at" :sort-field="sortField" :sort-direction="sortDirection"
+                              @click="sortProducts('updated_at')">
+                Last Updated At
+              </TableHeaderCell>
+              <TableHeaderCell field="status">
+                Status
+              </TableHeaderCell>
+              <TableHeaderCell field="published" :sort-field="sortField" :sort-direction="sortDirection"
+                              @click="sortProducts('published')">
+                Published
+              </TableHeaderCell>
+              <TableHeaderCell field="actions">
+                Actions
+              </TableHeaderCell>  
+                     
                 </tr>
                 
             </thead>
             <tbody>
                 <tr class="odd:bg-gray-100 focus-within:bg-gray-100"
                 v-for="(product, index) in products.data" :key="product.id">
+                
                   <td class="py-4 px-4 text-sm text-left border">
                     {{index + 1}}
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
-                    <img class="w-16 h-16 object-cover" :src="product.image" :alt="product.name">
+                     <img v-if="product.image_url" class="w-16 h-16 object-cover" :src="product.image_url" :alt="product.title">
+                     <img v-else class="w-16 h-16 object-cover" src="/assets/images/empty.svg">
+                   
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
-                      {{product.name}}
+                      {{product.title}}
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
-                     {{product.category}}
+                     {{product.categories}}
+                  </td> 
+                  <td class="py-4 px-4 text-sm text-left border">
+                   {{formatCurrency(product.price)}}
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
                     {{product.quantity}}
                   </td>
-                  <td class="py-4 px-4 text-sm text-left border">
-                   {{product.buying_price}}
-                  </td>
-                  <td class="py-4 px-4 text-sm text-left border">
-                    {{product.selling_price}}
-                  </td>
                  
+                  <td class="py-4 px-4 text-sm text-left border">
+                    {{product.updated_at}}
+                  </td>
+                 <td class="py-4 px-4 text-sm text-left border">
+                   <span class="bg-emerald-500 text-white p-2 rounded-md text-xs" v-if="product.status === 'in stock'">
+                            In Stock
+                    </span>
+                    <span class="bg-yellow-500 text-white p-2 rounded-md text-xs" v-else-if="product.status === 'low stock'">
+                          Low Stock
+                  </span>
+                  <span class="bg-red-500 text-white p-2 rounded-md text-xs" v-else>
+                        Out Of Stock
+                  </span>
+                    
+                  </td>
+                  <td class="py-4 px-4 text-sm text-left border">
+                     <span class="bg-emerald-500 text-white p-2 rounded-md text-xs" v-if="product.published">
+                            Active
+                        </span>
+                        <span class="bg-red-500 text-white p-2 rounded-md text-xs" v-else>
+                            In-Active
+                     </span>
+                    
+                  </td>
+                  <td class="py-4 px-4 text-sm text-left border">
+                      <div class="flex justify-between flex-col md:flex-row items-center cursor-pointer">
+                         <div class="flex items-center space-x-2 divide-x">
+                             <a   class="px-4 text-sm flex text-gray-100 bg-emerald-600 p-2 rounded">
+                                 <i class="pi pi-eye text-white"></i>
+                             </a>
+                             <a class="px-4 text-sm flex text-gray-100 bg-secondary p-2 rounded">
+                                 <i class="pi pi-pencil text-white"></i>
+                             </a>
+
+                             <button @click.prevent="confirm2()"  class="px-4 text-sm flex text-gray-100 bg-red-500 p-2 rounded">
+                                 <i class="pi pi-trash text-white"></i>
+                             </button>
+                         </div>
+
+
+
+                     </div>
+                  </td>
                 </tr>
             </tbody>
         </table>
@@ -150,37 +206,47 @@
               </header>
               <form  @submit.prevent="onSubmit">
                 <div class="bg-white px-4 pt-5 pb-4">
+                 
                   <div>
-                    <CustomInput class="mb-2" label="Product Name" v-model="product.name"/>
-                    <span class="text-sm text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
+                    <CustomInput class="mb-2" label="Product Name" v-model="product.title"/>
+                    <span class="text-sm text-red-500" v-if="errors.title">{{errors.title[0]}}</span>
                   </div>
                   <div>
                     <CustomInput type="number" class="mb-2" label="Product Quantity" v-model="product.quantity"/>
                     <span class="text-sm text-red-500" v-if="errors.quantity">{{errors.quantity[0]}}</span>
                   </div>
                   <div>
-                    <CustomInput type="number" class="mb-2" label="Buying Price" v-model="product.buying_price"/>
-                    <span class="text-sm text-red-500" v-if="errors.buying_price">{{errors.buying_price[0]}}</span>
-                  </div>
-                  <div>
-                    <CustomInput type="number" class="mb-2" label="Selling Price" v-model="product.selling_price"/>
-                    <span class="text-sm text-red-500" v-if="errors.selling_price">{{errors.selling_price[0]}}</span>
-                  </div>
+                    <CustomInput type="number" class="mb-2" label="Price" v-model="product.price"/>
+                    <span class="text-sm text-red-500" v-if="errors.price">{{errors.price[0]}}</span>
+                  </div>                 
                   
+                  <div class="mt-4 mb-3">
+                     <label class="block text-sm font-medium text-gray-700 mb-3 mt-4">
+                       Select Categories
+                    </label>
+                     <treeselect v-model="product.categories" :multiple="true" :options="categoryOptions" :errors="errors['categories']"/>
+                       <span class="text-sm text-red-500" v-if="errors.categories">{{errors.categories[0]}}</span>    
+                  </div>
+
                   <div>
-                     <CustomInput required type="select" :select-options="categoryOptions"
-                        v-model="product.product_categories_id"    label="Product Category"/>
-                       <span class="text-sm text-red-500" v-if="errors.product_categories_id">{{errors.product_categories_id[0]}}</span>    
+                    <CustomInput type="checkbox" class="mb-2" v-model="product.published" label="Published" :errors="errors['published']"/>
                   </div>
                     
-                  
-                   <div>
-                    <CustomInput type="file"  class="mb-2" label="Image" @change="file => product.image = file"/>
-                     <span class="text-sm text-red-500" v-if="errors.image">{{errors.image[0]}}</span>  
-                
-                    </div>   
-                
-                 
+                  <div>
+              <label class="block text-sm font-medium text-gray-700 mb-3 mt-4">
+                  Upload Product Images
+              </label>
+            
+            <image-preview v-model="product.images"
+                                  :images="product.images"
+                                  v-model:deleted-images="product.deleted_images"
+                                  v-model:image-positions="product.image_positions"/>
+                            </div>
+                          
+                  <div>
+                    <CustomInput type="textarea" class="mb-2" label="Description" v-model="product.description"/>
+                    <span class="text-sm text-red-500" v-if="errors.descrption">{{errors.description[0]}}</span>
+                  </div>
                 
                 </div>
                 <footer class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -205,33 +271,60 @@
       </div>
     </Dialog>
   </TransitionRoot>
+    </div>
+
   </AppLayout>
 </template>
 
 <script setup>
 import {computed, onMounted, onUpdated, ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import {Inertia} from "@inertiajs/inertia";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import CustomInput from '@/Shared/CustomInput.vue'
-import {PlusIcon, FolderIcon, FunnelIcon, ArrowUpTrayIcon, ClipboardDocumentCheckIcon} from '@heroicons/vue/24/outline'
+import FileUpload from "primevue/fileupload";
+import {PlusIcon, FolderIcon, FunnelIcon, ArrowUpTrayIcon, ClipboardDocumentCheckIcon,DocumentArrowDownIcon} from '@heroicons/vue/24/outline'
 import SearchFilter  from '@/Shared/SearchFilter.vue'
 import NButton from '@/Shared/NButton.vue'
 import NButtonLoading from '@/Shared/NButtonLoading.vue'
+import ImagePreview from '../../Components/ImagePreview.vue'
+import TableHeaderCell from '../../Components/Core/Table/TableHeaderCell.vue'
+import Treeselect from 'vue3-treeselect'
+import 'vue3-treeselect/dist/vue3-treeselect.css'
 import { useForm } from '@inertiajs/vue3';
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
 
 const show = ref(false)
 
-const categoryOptions =  computed(() =>props.categories.map(c =>({key: c.id, text: c.name,value:c.id})))
+const categoryOptions =  computed(() =>props.categories.map(c =>({id: c.id, label: c.name})))
+
+
+const sortField = ref('updated_at');
+const sortDirection = ref('desc');
+
+const confirm = useConfirm();
+const toast = useToast();
+
+
+
+function formatCurrency (value, decimals=2, thousandsSeparator= ','){
+    let result = parseFloat(value).toFixed(decimals).toString();
+    if(thousandsSeparator) result = result.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator)
+    return result;
+}
 
 
 const product = useForm({
-  name: null,
+  title: null,
   quantity: null,
-  buying_price: null,
-  selling_price:null,
-  product_categories_id: null,
-  image: null,
-  business_unit_id: 1
+  description:null,
+  price: null,
+  categories: [],
+  images: [],
+  deleted_images: [],
+  image_positions: {},
+  published: false
  
 })
 
@@ -263,7 +356,7 @@ const search = ref('')
 
 function onSubmit(){
 loading.value = true
-product.post(route('product.store'),{
+product.post(route('product.storeProduct'),{
 onSuccess:()=>{
   closeModal()
   clearInput()
@@ -273,6 +366,42 @@ onError:()=>{
   loading.value = false
 }
 })
+}
+
+function sortProducts(field){
+    if (field === sortField.value){
+        if (sortDirection.value === 'desc'){
+            sortDirection.value = 'asc';
+        }else {
+            sortDirection.value = 'desc'
+        }
+    }else {
+        sortField.value = field;
+        sortDirection.value = 'asc'
+    }
+
+    Inertia.get(
+        route("product.index"),
+        {sort_field:sortField.value,sort_direction:sortDirection.value},{
+            preserveState:true,
+            replace:true
+        }
+    )
+
+}
+function confirmDelete(id){
+    confirm.require({
+        group:'positionDialog',
+        message: 'Do you want to delete this record?',
+        icon: 'pi pi-exclamation-triangle',
+        position:'top',
+        accept: () => {
+            toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
+        },
+        reject: () => {
+            toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        }
+    });
 }
 
 </script>

@@ -9,13 +9,15 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> 
+        @include('components.header')
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+           
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -128,5 +130,18 @@
         </div>
       </div>
     </footer> 
+    @include('components.footer')
+    <script>
+    function searchComponent() {
+        return {
+            searchKeyword: '',
+            updateUrl() {
+                      if (this.searchKeyword.trim() !== '') {
+                          window.location.href = `?search=${encodeURIComponent(this.searchKeyword)}`;
+                      }
+                  }
+              };
+          }
+      </script>
     </body>
 </html>

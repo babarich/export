@@ -39,11 +39,12 @@ const logout = () => {
     <div class="md:flex md:flex-col">
       <div class="md:flex md:flex-col md:h-screen">
         <div class="md:flex md:flex-shrink-0">
-          <div class="flex items-center justify-between px-6 py-4 bg-white border border-r  md:flex-shrink-0 md:justify-center md:w-56">
+          <div class="flex items-center justify-between px-6 py-4 bg-white border border-r border-secondary
+          border-r-gray-100 border-b-gray-100 md:flex-shrink-0 md:justify-center md:w-72">
            <div class="shrink-0 flex items-center">
             <Link :href="route('dashboard')" class="flex">
-                <ApplicationMark class="block h-6 w-auto mr-2" />
-                <span class="text-indigo-900 font-semibold">Maduka System</span>
+                
+                <span class="text-primary font-semibold">Mikese Admin Panel</span>
             </Link>
         </div>
             <dropdown class="md:hidden" placement="bottom-end">
@@ -78,7 +79,7 @@ const logout = () => {
 
                             <span v-else class="inline-flex rounded-md">
                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                    {{ $page.props.auth.user.fullname }}
+                                    {{ $page.props.auth.user.name }}
 
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -91,6 +92,7 @@ const logout = () => {
 
 
                             <div class="border-t border-gray-200" />
+                            
 
                             <!-- Authentication -->
                             <form @submit.prevent="logout">
@@ -108,7 +110,7 @@ const logout = () => {
 
         </div>
         <div class="md:flex md:flex-grow md:overflow-hidden">
-          <main-menu class="hidden flex-shrink-0 p-4 w-56 bg-gray-50 border border-r overflow-y-auto md:block" />
+          <main-menu class="hidden flex-shrink-0 p-4 w-72 bg-white border-r overflow-y-auto md:block overflow-x-hidden" />
           <div class="px-4 py-8 md:flex-1 md:p-12 md:overflow-y-auto" scroll-region>
 
             <slot />

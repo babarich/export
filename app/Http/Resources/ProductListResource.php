@@ -17,12 +17,18 @@ class ProductListResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'image_url' => $this->image,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'updated_at' => ( new \DateTime($this->updated_at) )->format('Y-m-d H:i:s'),
-        ];
+        'id'         => $this->id,
+        'title'      => $this->title,
+        'image_url'  => $this->image,
+        'price'      => $this->price,
+        'quantity'   => $this->quantity,
+        'status'     => $this->quantity == 0 
+                            ? 'out of stock' 
+                            : ($this->quantity <= 5 ? 'low stock' : 'in stock'),
+        'categories' => $this->categories->pluck('name'),
+        'published'  => $this->published,
+        'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
+    ];
+
     }
 }

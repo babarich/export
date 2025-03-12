@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -12,16 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth',
-    config('jetstream.auth_session'),
-    'admin',
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-});
+
 
 Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('home');
@@ -49,7 +43,11 @@ Route::middleware(['auth', 'verified'])->group(function() {
 });
 
 Route::group(['middleware' => 'auth', 'verified', 'admin'],function () {
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('categories', CategoryController::class)->except('show');
+    Route::get('/categories/tree', [CategoryController::class, 'getAsTree']);
+    Route::get('/index/products', [ProductAdminController::class, 'index'])->name('product.index');
+     Route::post('/store_product', [ProductAdminController::class, 'store'])->name('product.storeProduct');
     Route::group(['prefix'=>'products'], function(){
       Route::name('product.')->group(function(){
        Route::controller(ProductController::class)->group(function(){
@@ -59,7 +57,7 @@ Route::group(['middleware' => 'auth', 'verified', 'admin'],function () {
         Route::get('product_categories', 'readAllProductCategories')->name('categories');
         Route::get('product_categories', 'AllProductCategories')->name('viewCategories');
         Route::get('all/products', 'index')->name('products');
-        Route::get('products/index', 'posIndex')->name('pos');
+        Route::get('categories', 'category')->name('category');
         Route::get('products/{product_categories_uuid}', 'show');
         Route::post('create/product', 'store')->name('store');
         Route::post('add_item/cart', 'addCartItem')->name('addCartItem');

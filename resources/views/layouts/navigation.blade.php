@@ -8,9 +8,29 @@
 >
     <div>
         <a href="{{ route('home') }}" class="block py-navbar-item pl-5"> 
-          <h3 class="font-bold text-2xl leading-tight">MIKESE</h3>       
+          <h3 class="font-bold text-2xl leading-tight text-primary">MIKESE</h3>       
          </a>
     </div>
+    <div class="w-full max-w-xl relative flex" x-data="searchComponent()">
+                <span class="absolute left-4 top-3 text-lg text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            
+                    <form action="" method="GET" class="flex-1" @submit.prevent="updateUrl">
+                        <input class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none hidden md:flex" 
+                            type="text" 
+                            name="search" 
+                            placeholder="Search for the products"
+                            x-model="searchKeyword"
+                        />
+                    </form>
+                    <button
+                        class="bg-secondary border border-secondary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition hidden md:flex"
+                        @click="updateUrl">
+                        <span class="mt-3">Search</span>
+                    </button>
+                </div>
+            
     <!-- Responsive Menu -->
     <div
         class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-gray-100 md:hidden"
@@ -18,37 +38,35 @@
     >
         <ul class="space-x-6">
             <li>
-                <a
-                    href="{{ route('cart.index') }}"
-                    class="relative flex items-center justify-between py-2 px-3 transition-colors hover:text-red-800"
-                >
-                    <div class="flex items-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 mr-2 -mt-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                        </svg>
-                        Cart
+                <select class="nice-select nice-select language">
+                    <option value="" selected>Language</option>
+                    <option>English</option>
+                    <option>Franch</option>
+                </select>
+
+                <!-- Currency -->
+                <select class="nice-select nice-select currency">
+                    <option selected>Currency</option>
+                    <option>Dollar</option>
+                    <option>Euro</option>
+                </select>
+            </li>
+            <li>
+                <a href="{{ route('cart.index') }}" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-bag-shopping"></i>
                     </div>
-                    <!-- Cart Items Counter -->
-                    <small
-                        x-show="cartItemsCount"
+                    <div class="text-xs leading-3">Cart</div>
+                    <div
+                     x-show="cartItemsCount"
                         x-transition
                         x-text="cartItemsCount"
                         x-cloak
-                        class="py-[2px] px-[8px] rounded-full bg-red-500"
-                    ></small>
-                    <!--/ Cart Items Counter -->
+                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        </div>
                 </a>
+                
+                    
             </li>
             @if (!Auth::guest())
                 <li x-data="{open: false}" class="relative">
@@ -199,33 +217,36 @@
     <nav class="hidden md:block">
         <ul class="grid grid-flow-col items-center space-x-6">
             <li>
-                <a
-                    href="{{ route('cart.index') }}"
-                    class="relative inline-flex items-center py-navbar-item px-navbar-item hover:text-red-700"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                    </svg>
-                    Cart
-                    <small
-                        x-show="cartItemsCount"
+                <select class="nice-select nice-select border-none">
+                    <option value="" selected>Language</option>
+                    <option>English</option>
+                    <option>Kiswahili</option>
+                </select>
+                
+            </li>
+            <li>
+                <!-- Currency -->
+                <select class="nice-select nice-select border-none">
+                    <option selected>Currency</option>
+                    <option>USD</option>
+                    <option>TSH</option>
+                </select>
+            </li>
+            <li>
+                  <a href="{{ route('cart.index') }}" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="text-xs leading-3">Cart</div>
+                    <div
+                     x-show="cartItemsCount"
                         x-transition
-                        x-cloak
                         x-text="cartItemsCount"
-                        class="absolute z-[100] top-4 -right-3 py-[2px] px-[8px] rounded-full bg-red-500"
-                    ></small>
+                        x-cloak
+                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-secondary text-white text-xs">
+                        </div>
                 </a>
+                
             </li>
             @if (!Auth::guest())
                 <li x-data="{open: false}" class="relative">
@@ -259,7 +280,7 @@
                         x-cloak
                         class="absolute z-10 right-0 bg-white border-t-[1px] space-x-6 rounded-b-[3px] py-5 px-[15px] w-[205px] shadow-sm mt-3.5 group-hover:mt-[5px]"
                     >
-                    <p class="text-sm leading-[18px] font-medium mb-4 text-secondary text-center">Welcome to
+                    <p class="text-sm leading-[18px] font-medium mb-4 text-primary text-center">Welcome to
                                 MIKESE </p>
                         <li>
                             <a
@@ -335,26 +356,14 @@
                 </li>
             @else
                 <li>
-                    <a
-                        href="{{ route('login') }}"
-                        class="flex items-center py-navbar-item px-navbar-item hover:text-red-700"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                            />
-                        </svg>
-                        Login
-                    </a>
+                    <a href="{{ route('login') }}" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-unlock"></i>
+                    </div>
+                    <div class="text-xs leading-3">Login</div>
+                  
+                </a>
+                
                 </li>
                 <li>
                     <a

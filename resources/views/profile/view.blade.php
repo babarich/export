@@ -148,7 +148,7 @@
                                     <template x-for="[code, state] of Object.entries(billingCountryStates)"
                                               :key="code">
                                         <option :selected="code === billingAddress.state"
-                                                :value="code" x-text="state"></option>
+                                                :value="code" x-text="state.name"></option>
                                     </template>
                                 </x-input>
                             </template>
@@ -235,7 +235,7 @@
                                     <template x-for="[code, state] of Object.entries(shippingCountryStates)"
                                               :key="code">
                                         <option :selected="code === shippingAddress.state"
-                                                :value="code" x-text="state"></option>
+                                                :value="code" x-text="state.name"></option>
                                     </template>
                                 </x-input>
                             </template>
