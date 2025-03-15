@@ -176,10 +176,11 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                               
 </div>
 <div class="flex justify-center mt-8 mb-4 sm:mb-6 lg:mb-2 lg:mt-12">
-    <button data-variant="normal" class="inline-flex items-center justify-center shrink-0 font-semibold 
-    leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-0 focus:shadow f
+    <a href="{{route('product.list')}}" class="inline-flex items-center justify-center shrink-0  
+    leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-0 focus:shadow 
     ocus:ring-1 focus:ring-yellow-600 bg-secondary text-white border border-transparent hover:bg-yellow-600 px-5 py-0 
-    h-12 text-sm font-semibold h-11 md:text-base">View All Products <i class="fa fa-arrow-right ml-2"></i></button></div>
+    h-12 text-sm font-semibold  md:text-base">View All Products <i class="fa fa-arrow-right ml-2"></i></a>
+</div>
 </div>
 </div>
     <?php endif; ?>

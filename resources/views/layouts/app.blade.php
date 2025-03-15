@@ -105,6 +105,7 @@
           <div class="flex flex-col space-y-3">
             <a href="#" class="hover:text-primary">Careers</a>
             <a href="#" class="hover:text-primary">Privacy Policy</a>
+            <a href="#" class="hover:text-primary">FAQs</a>
           </div>
         </div>
 
@@ -131,6 +132,7 @@
       </div>
     </footer> 
     @include('components.footer')
+    @yield('scripts')
     <script>
     function searchComponent() {
         return {

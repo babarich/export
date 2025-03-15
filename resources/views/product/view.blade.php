@@ -1,5 +1,7 @@
 <x-app-layout>
-    <div  x-data="productItem({{ json_encode([
+
+<div class="container grid grid-cols-2 gap-6 mt-8"
+x-data="productItem({{ json_encode([
                     'id' => $product->id,
                     'slug' => $product->slug,
                     'image' => $product->image ?: '/img/noimage.png',
@@ -7,9 +9,7 @@
                     'price' => $product->price,
                     'quantity' => $product->quantity,
                     'addToCartUrl' => route('cart.add', $product)
-                ]) }})" class="container mx-auto">
-        <div class="grid gap-6 grid-cols-1 lg:grid-cols-5">
-            <div class="lg:col-span-3">
+                ]) }})">
                 <div
                     x-data="{
                       images: {{$product->images->count() ?
@@ -92,70 +92,158 @@
                         </template>
                     </div>
                 </div>
+        
+
+        <div>
+            <h2 class="text-3xl font-medium uppercase mb-2">{{$product->title}}</h2>
+            <div class="flex items-center mb-4">
+                <div class="flex gap-1 text-sm text-yellow-400">
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                </div>
+                <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div>
             </div>
-            <div class="lg:col-span-2">
-                <h1 class="text-lg font-semibold">
-                    {{$product->title}}
-                </h1>
-                <div class="text-xl font-bold mb-6">${{$product->price}}</div>
-                @if ($product->quantity === 0)
-                    <div class="bg-red-400 text-white py-2 px-3 rounded mb-3">
-                        The product is out of stock
-                    </div>
-                @endif
-                <div class="flex items-center justify-between mb-5">
-                    <label for="quantity" class="block font-bold mr-4">
-                        Quantity
-                    </label>
-                    <input
-                        type="number"
-                        name="quantity"
-                        x-ref="quantityEl"
-                        value="1"
-                        min="1"
-                        class="w-32 focus:border-purple-500 focus:outline-none rounded"
-                    />
-                </div>
-                <button
-                    :disabled="product.quantity === 0"
-                    @click="addToCart($refs.quantityEl.value)"
-                    class="btn-primary py-4 text-lg flex justify-center min-w-0 w-full mb-6"
-                    :class="product.quantity === 0 ? 'cursor-not-allowed' : 'cursor-pointer'"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6 mr-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                    </svg>
-                    Add to Cart
+            <div class="space-y-2">
+                <p class="text-gray-800 font-semibold space-x-2">
+                    <span>Availability: </span>
+                    @if ($product->quantity === 0)
+                    <span class="text-red-600">Out Of Stock</span>
+                    @else
+                        <span class="text-green-600">In Stock</span>
+                    @endif
+                    
+                </p>
+                
+                <p class="space-x-2">
+                    <span class="text-gray-800 font-semibold">Category: </span>
+                    <span class="text-gray-600">{{isset($product->categories) ? implode(',', $product->categories->pluck('name')->toArray())  : 'N/A'}}</span>
+                </p>
+                
+            </div>
+            <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
+                <p class="text-xl text-primary font-semibold">{{$product->price}}</p>
+
+            </div>
+
+          
+
+           <div x-data="{ quantity: 1 }">
+    <div class="mt-4">
+        <h3 class="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
+        <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+            <div class="flex items-center space-x-2">
+                <!-- Decrease Button -->
+                <button 
+                    type="button" 
+                    @click="if (quantity > 1) quantity--" 
+                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                    -
                 </button>
-                <div class="mb-6" x-data="{expanded: false}">
-                    <div
-                        x-show="expanded"
-                        x-collapse.min.120px
-                        class="text-gray-500 wysiwyg-content"
-                    >
-                        {!! $product->description !!}
-                    </div>
-                    <p class="text-right">
-                        <a
-                            @click="expanded = !expanded"
-                            href="javascript:void(0)"
-                            class="text-purple-500 hover:text-purple-700"
-                            x-text="expanded ? 'Read Less' : 'Read More'"
-                        ></a>
-                    </p>
-                </div>
+
+                <!-- Quantity Input -->
+                <input 
+                    type="number" 
+                    name="quantity" 
+                    x-model="quantity" 
+                    min="1"
+                    class="w-16 text-center border rounded focus:border-purple-500 focus:outline-none" />
+
+                <!-- Increase Button -->
+                <button 
+                    type="button" 
+                    @click="quantity++" 
+                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                    +
+                </button>
             </div>
         </div>
     </div>
+
+    <div class="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
+        <button 
+            :disabled="product.quantity === 0"
+            @click="addToCart(quantity)" 
+            :class="product.quantity === 0 ? 'cursor-not-allowed' : 'cursor-pointer'"
+            class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
+            <i class="fa-solid fa-bag-shopping"></i> Add to cart
+        </button>
+    </div>
+</div>
+
+
+            
+        </div>
+    </div>
+    <!-- ./product-detail -->
+
+    <!-- description -->
+    <div class="container pb-16 mt-4">
+        <h3 class="border-b border-gray-200  text-gray-800 pb-3 font-medium">Product details</h3>
+        <div class="w-3/5 pt-6">
+            <div class="text-gray-600">
+                <p>{{$product->description}}</p>
+               
+            </div>
+
+           
+        </div>
+    </div>
+
+     <!-- related product -->
+    <div class="container pb-16">
+        <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Related products</h2>
+        <div class="grid grid-cols-4 gap-6">
+        @foreach ($products as $prod)
+        
+           <article class="h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all
+            duration-200 hover:-translate-y-0.5 hover:shadow"
+                x-data="productItem({{ json_encode([
+                                    'id' => $prod->id,
+                                    'slug' => $prod->slug,
+                                    'image' => $prod->image ?: '/img/noimage.png',
+                                    'title' => $prod->title,
+                                    'price' => $prod->price,
+                                    'addToCartUrl' => route('cart.add', $prod)
+                                ]) }})">
+                                            <div
+                                    class="relative flex h-48 w-auto cursor-pointer items-center justify-center sm:h-64">
+                                    <span class="sr-only">Product Image</span>
+                                      <a href="{{ route('product.view', $prod->slug) }}"
+                                     class="aspect-w-3 aspect-h-2 block overflow-hidden">
+                                    <img 
+                                     class="object-cover rounded-lg hover:scale-105 hover:rotate-1 transition-transform"
+                                        src="{{ asset($prod->image ?: '/img/noimage.png') }}" alt="{{ $prod->title }}"
+                                        style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                      </a>
+                                </div>
+                                <header class="p-3 md:p-6">
+                                    <div class="mb-2 flex items-center"><span
+                                            class="text-sm font-semibold text-heading md:text-base">{{$prod->price}}</span></div>
+                                    <h3 class="mb-4 cursor-pointer truncate text-xs text-body md:text-sm">{{$prod->title}}</h3>
+                                    <div><button
+                                          @click="addToCart()"
+                                            class="group flex h-7 w-full items-center justify-between rounded bg-gray-100 
+                                            text-xs text-body-dark transition-colors hover:border-accent hover:bg-primary hover:text-white 
+                                            focus:border-accent focus:bg-primary focus:text-white focus:outline-0 md:h-9 md:text-sm"><span
+                                                class="flex-1">Add to cart</span>
+                                                <span class="grid h-7 w-7 place-items-center bg-gray-200 transition-colors
+                                                duration-200 group-hover:bg-primary group-focus:bg-primary
+                                                ltr:rounded-tr ltr:rounded-br rtl:rounded-tl rtl:rounded-bl md:h-9 md:w-9">
+                                                <i class="fa-solid fa-plus h-4 w-4 stroke-2"></i>
+                                                
+                                                </span>
+                                                </button>
+                                                </div>
+                                </header>
+                            </article>
+                              @endforeach
+        </div>
+    </div>
+    <!-- ./related product -->
+
+    
+  
 </x-app-layout>

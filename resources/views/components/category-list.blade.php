@@ -37,7 +37,7 @@
           <ul class="flex items-center">
                     <!-- home -->
                     <li class="relative group">
-                        <a href="index-1.html"
+                        <a href="{{ route('home') }}"
                             class="text-white leading-[26px] flex items-center text-base font-medium px-2.5 py-[15px] gap-1 transition duration-300">Home
                             
                         </a>
@@ -53,15 +53,7 @@
 
                         
                     </li>
-                    <!-- pages -->
-                    <li class="relative group">
-                        <a href="#"
-                            class="text-white leading-[26px] flex items-center text-base font-medium px-2.5 py-[15px] gap-1 transition duration-300">Pages
-                            
-                        </a>
-
-                       
-                    </li>
+                    
                     <!-- contact -->
                     <li><a href="contact.html"
                             class="text-white leading-[26px] flex items-center text-base font-medium px-2.5 py-[15px] transition duration-300">Contact</a>

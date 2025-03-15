@@ -8,113 +8,259 @@ $categoryList = \App\Models\Category::getActiveAsTree();
 
         <x-category-list :category-list="$categoryList" class="-ml-5 -mt-5 -mr-5 px-4"/>
 
-        <section id="hero" class="mt-4 py-5">
-      <!-- Flex Container -->
-      
-       <div
-        class="container flex flex-col-reverse items-center px-4 mx-auto mt-4 space-y-0 md:space-y-0 md:flex-row"
-      >
-        <!-- Left item -->
-        <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
-          <h1
-            class="max-w-md text-4xl font-bold text-center md:text-5xl md:text-left"
-          >
-            Bring everyone together to get better products
-          </h1>
-          <p class="max-w-sm text-center text-darkGrayishBlue md:text-left">
-            Mikese Export make it easy  for business and other customers to order and get their products within early as possible
-          </p>
-         <div class="mt-12">
-                <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
-                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
-            </div>
-        </div>
-        <!-- Image -->
-        <div class="md:w-1/2">
-          <img class="object-contain h-5/6" src="{{asset('assets/images/ecom.png')}}" alt="" />
-        </div>
-      </div>
-    </section>
-
-        <!-- features -->
-    <div class="container py-16">
-        <div class="w-11/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
-            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
-                <img src="assets/images/icons/delivery-van.svg" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">Fast Delivery</h4>
-                    <p class="text-gray-500 text-sm">Order now to deliver</p>
-                </div>
-            </div>
-            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
-                <img src="assets/images/icons/money-back.svg" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">Sell Products</h4>
-                    <p class="text-gray-500 text-sm">Easily sell products</p>
-                </div>
-            </div>
-            <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
-                <img src="assets/images/icons/service-hours.svg" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">24/7 Support</h4>
-                    <p class="text-gray-500 text-sm">Customer support</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ./features -->
-
-    <section class="w-11/12 container">
-    <div class="flex flex-col md:w-1/2">
-        <div>
-
-        </div>
-        <div class="md:w-1/2">
-       <div class="flex gap-2 items-center p-3 pb-0" x-data="{
-            selectedSort: '{{ request()->get('sort', '-updated_at') }}',
-            searchKeyword: '{{ request()->get('search') }}',
-            updateUrl() {
-                const params = new URLSearchParams(window.location.search)
-                if (this.selectedSort && this.selectedSort !== '-updated_at') {
-                    params.set('sort', this.selectedSort)
-                } else {
-                    params.delete('sort')
-                }
-
-                if (this.searchKeyword) {
-                    params.set('search', this.searchKeyword)
-                } else {
-                    params.delete('search')
-                }
-                window.location.href = window.location.origin + window.location.pathname + '?'
-                + params.toString();
-            }
-        }">
-        <form action="" method="GET" class="flex-1" @submit.prevent="updateUrl">
-            <x-input class="w-full" type="text" name="search" placeholder="Search for the products"
-                     x-model="searchKeyword"/>
-        </form>
-        <x-input
-            x-model="selectedSort"
-            @change="updateUrl"
-            type="select"
-            name="sort"
-            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
-            <option value="price">Price (ASC)</option>
-            <option value="-price">Price (DESC)</option>
-            <option value="title">Title (ASC)</option>
-            <option value="-title">Title (DESC)</option>
-            <option value="-updated_at">Last Modified at the top</option>
-            <option value="updated_at">Last Modified at the bottom</option>
-        </x-input>
-
-    </div>
-        </div>
-
-    </div>
-    </section>
+ 
     
-    <section class="w-11/12 container">
+        <!-- shop wrapper -->
+    <div class="container grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start">
+        <!-- sidebar -->
+        <!-- drawer init and toggle -->
+        <div class="text-center md:hidden" >
+            <button
+                class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block md:hidden"
+                type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example"
+                aria-controls="drawer-example">
+                <ion-icon name="grid-outline"></ion-icon>
+            </button>
+        </div>
+
+  <!-- drawer component -->
+<div id="drawer-example" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
+    <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>Info</h5>
+    <button type="button" data-drawer-hide="drawer-example" aria-controls="drawer-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+       <span class="sr-only">Close menu</span>
+    </button>
+    <div class="divide-y divide-gray-200 space-y-5">
+        <div>
+            <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" name="cat-1" id="cat-1"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Bedroom</label>
+                    <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="cat-2" id="cat-2"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Sofa</label>
+                    <div class="ml-auto text-gray-600 text-sm">(9)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="cat-3" id="cat-3"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="cat-3" class="text-gray-600 ml-3 cusror-pointer">Office</label>
+                    <div class="ml-auto text-gray-600 text-sm">(21)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="cat-4" id="cat-4"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="cat-4" class="text-gray-600 ml-3 cusror-pointer">Outdoor</label>
+                    <div class="ml-auto text-gray-600 text-sm">(10)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Brands</h3>
+            <div class="space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" name="brand-1" id="brand-1"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">Cooking Color</label>
+                    <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="brand-2" id="brand-2"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="brand-2" class="text-gray-600 ml-3 cusror-pointer">Magniflex</label>
+                    <div class="ml-auto text-gray-600 text-sm">(9)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="brand-3" id="brand-3"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="brand-3" class="text-gray-600 ml-3 cusror-pointer">Ashley</label>
+                    <div class="ml-auto text-gray-600 text-sm">(21)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="brand-4" id="brand-4"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="brand-4" class="text-gray-600 ml-3 cusror-pointer">M&D</label>
+                    <div class="ml-auto text-gray-600 text-sm">(10)</div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="brand-5" id="brand-5"
+                        class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                    <label for="brand-5" class="text-gray-600 ml-3 cusror-pointer">Olympic</label>
+                    <div class="ml-auto text-gray-600 text-sm">(10)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
+            <div class="mt-4 flex items-center">
+                <input type="text" name="min" id="min"
+                    class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+                    placeholder="min">
+                <span class="mx-3 text-gray-500">-</span>
+                <input type="text" name="max" id="max"
+                    class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+                    placeholder="max">
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">size</h3>
+            <div class="flex items-center gap-2">
+                <div class="size-selector">
+                    <input type="radio" name="size" id="size-xs" class="hidden">
+                    <label for="size-xs"
+                        class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XS</label>
+                </div>
+                <div class="size-selector">
+                    <input type="radio" name="size" id="size-sm" class="hidden">
+                    <label for="size-sm"
+                        class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">S</label>
+                </div>
+                <div class="size-selector">
+                    <input type="radio" name="size" id="size-m" class="hidden">
+                    <label for="size-m"
+                        class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">M</label>
+                </div>
+                <div class="size-selector">
+                    <input type="radio" name="size" id="size-l" class="hidden">
+                    <label for="size-l"
+                        class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">L</label>
+                </div>
+                <div class="size-selector">
+                    <input type="radio" name="size" id="size-xl" class="hidden">
+                    <label for="size-xl"
+                        class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XL</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
+            <div class="flex items-center gap-2">
+                <div class="color-selector">
+                    <input type="radio" name="color" id="red" class="hidden">
+                    <label for="red"
+                        class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
+                        style="background-color: #fc3d57;"></label>
+                </div>
+                <div class="color-selector">
+                    <input type="radio" name="color" id="black" class="hidden">
+                    <label for="black"
+                        class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
+                        style="background-color: #000;"></label>
+                </div>
+                <div class="color-selector">
+                    <input type="radio" name="color" id="white" class="hidden">
+                    <label for="white"
+                        class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
+                        style="background-color: #fff;"></label>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+       <a href="#" class="px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Learn more</a>
+       <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get access <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></a>
+    </div>
+ </div>
+
+        <!-- ./sidebar -->
+        <div class="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hiddenb hidden md:block">
+            <div class="divide-y divide-gray-200 space-y-5">
+                <div>
+
+              <x-category-radio :category-list="$categoryList" class="-ml-5 -mt-5 -mr-5 px-4"/>
+                    {{-- <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="cat-1" id="cat-1"
+                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Bedroom</label>
+                            <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                        </div>
+                     
+                    </div> --}}
+                </div>
+
+               
+
+                <div class="pt-4">
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
+                    <div class="mt-4 flex items-center">
+                        <input type="text" name="min" id="min"
+                            class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+                            placeholder="min">
+                        <span class="mx-3 text-gray-500">-</span>
+                        <input type="text" name="max" id="max"
+                            class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+                            placeholder="max">
+                    </div>
+                </div>
+
+
+               
+
+            </div>
+        </div>
+        <!-- products -->
+        <div class="col-span-3">
+            <div class="flex flex-col md:w-1/2">
+            
+            <div class="md:w-1/2">
+        <div class="flex gap-2 items-center p-3 pb-0" x-data="{
+                selectedSort: '{{ request()->get('sort', '-updated_at') }}',
+                searchKeyword: '{{ request()->get('search') }}',
+                updateUrl() {
+                    const params = new URLSearchParams(window.location.search)
+                    if (this.selectedSort && this.selectedSort !== '-updated_at') {
+                        params.set('sort', this.selectedSort)
+                    } else {
+                        params.delete('sort')
+                    }
+
+                    if (this.searchKeyword) {
+                        params.set('search', this.searchKeyword)
+                    } else {
+                        params.delete('search')
+                    }
+                    window.location.href = window.location.origin + window.location.pathname + '?'
+                    + params.toString();
+                }
+            }">
+            <div class="flex gap-2 ml-auto">
+            <form action="" method="GET" class="flex-1" @submit.prevent="updateUrl">
+                            <x-input class="w-full" type="text" name="search" placeholder="Search for the products"
+                                    x-model="searchKeyword"/>
+            </form>
+            </div>
+           
+            <x-input
+                x-model="selectedSort"
+                @change="updateUrl"
+                type="select"
+                name="sort"
+                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
+                <option value="price">Price (ASC)</option>
+                <option value="-price">Price (DESC)</option>
+                <option value="title">Title (ASC)</option>
+                <option value="-title">Title (DESC)</option>
+                <option value="-updated_at">Last Modified at the top</option>
+                <option value="updated_at">Last Modified at the bottom</option>
+            </x-input>
+
+        </div>
+        </div>
+
+    </div>
 <?php if ( $products->count() === 0 ): ?>
     <div class="text-center text-gray-600 py-16 text-xl">
         There are no products published
@@ -122,7 +268,7 @@ $categoryList = \App\Models\Category::getActiveAsTree();
     <?php else: ?>
         <div class="px-4 xl:px-0">
             <div class="w-full pt-4 pb-20 lg:py-6">
-            <div class="grid gap-4 grig-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-3">
+            <div class="grid gap-4 grig-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 p-3" id="product-list">
                 @foreach($products as $product)
             <article class="h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all
             duration-200 hover:-translate-y-0.5 hover:shadow"
@@ -166,15 +312,118 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                                 </header>
                             </article>
                               @endforeach
-</div>
 
-        {{$products->appends(['sort' => request('sort'), 'search' => request('search')])->links()}}
+                            </div>
+
+            
+                            <div id="load-more-container" style="text-align: center; margin-top: 20px;">
+                @if ($products->nextPageUrl())
+                    <button id="load-more" data-next-page="{{ $products->nextPageUrl() }}"
+                        class="inline-flex items-center justify-center shrink-0  
+                            leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-0 focus:shadow 
+                            ocus:ring-1 focus:ring-blue-600 bg-primary text-white border border-transparent hover:bg-blue-600 px-5 py-0 
+                            h-12 text-sm font-semibold  md:text-base"
+                        style="padding: 10px 20px; font-size: 16px;">Load More Products</button>
+                @endif
+            </div>
+
+        {{-- {{$products->appends(['sort' => request('sort'), 'search' => request('search')])->links()}} --}}
 </div>
 </div>
     <?php endif; ?>
 
+        </div>
 
-    </section>
+        <!-- ./products -->
+    </div>
+    <!-- ./shop wrapper -->
+
+    
+    
+   
 
     
 </x-app-layout>
+
+@section('scripts')
+<script>
+    
+    $(document).ready(function() {
+
+        document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".category-item").forEach(label => {
+            label.addEventListener("click", function () {
+                this.querySelector(".category-radio").checked = true;
+                let categoryId = this.querySelector(".category-radio").value;
+                window.location.href = "{{ route('byCategory', '') }}/" + categoryId;
+            });
+        });
+    });
+
+
+        $('#load-more').click(function() {
+            let nextPageUrl = $(this).data('next-page');
+            if (!nextPageUrl) return;
+
+            $.get(nextPageUrl, function(response) {
+                if (response.products.length > 0) {
+                    response.products.forEach(product => {
+                        $('#product-list').append(`
+            <article class="h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all
+            duration-200 hover:-translate-y-0.5 hover:shadow"
+                x-data="productItem({{ json_encode([
+                                    'id' => $product->id,
+                                    'slug' => $product->slug,
+                                    'image' => $product->image ?: '/img/noimage.png',
+                                    'title' => $product->title,
+                                    'price' => $product->price,
+                                    'addToCartUrl' => route('cart.add', $product)
+                                ]) }})">
+                                            <div
+                                    class="relative flex h-48 w-auto cursor-pointer items-center justify-center sm:h-64">
+                                    <span class="sr-only">Product Image</span>
+                                      <a href="{{ route('product.view', $product->slug) }}"
+                                     class="aspect-w-3 aspect-h-2 block overflow-hidden">
+                                    <img alt="Razero Wolverine"
+                                     class="object-cover rounded-lg hover:scale-105 hover:rotate-1 transition-transform"
+                                        :src="product.image"
+                                        style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
+                                      </a>
+                                </div>
+                                <header class="p-3 md:p-6">
+                                    <div class="mb-2 flex items-center"><span
+                                            class="text-sm font-semibold text-heading md:text-base">${product->price}</span></div>
+                                    <h3 class="mb-4 cursor-pointer truncate text-xs text-body md:text-sm">${product->title}</h3>
+                                    <div><button
+                                          @click="addToCart()"
+                                            class="group flex h-7 w-full items-center justify-between rounded bg-gray-100 
+                                            text-xs text-body-dark transition-colors hover:border-accent hover:bg-primary hover:text-white 
+                                            focus:border-accent focus:bg-primary focus:text-white focus:outline-0 md:h-9 md:text-sm"><span
+                                                class="flex-1">Add to cart</span>
+                                                <span class="grid h-7 w-7 place-items-center bg-gray-200 transition-colors
+                                                duration-200 group-hover:bg-primary group-focus:bg-primary
+                                                ltr:rounded-tr ltr:rounded-br rtl:rounded-tl rtl:rounded-bl md:h-9 md:w-9">
+                                                <i class="fa-solid fa-plus h-4 w-4 stroke-2"></i>
+                                                
+                                                </span>
+                                                </button>
+                                                </div>
+                                </header>
+                            </article>
+
+                        `);
+                    });
+
+                    
+                    if (response.next_page_url) {
+                        $('#load-more').data('next-page', response.next_page_url);
+                    } else {
+                        $('#load-more').hide();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+@endsection
