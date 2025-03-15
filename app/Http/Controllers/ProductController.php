@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BannerResource;
+use App\Models\BannerImage;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
@@ -55,8 +57,12 @@ class ProductController extends Controller
                     ->orWhere('products.description', 'like', "%$search%");
             })->paginate(8);
 
+            $banQuery= BannerImage::query()->limit(3)->get();
+           
+
         return view('product.index', [
-            'products' => $products
+            'products' => $products,
+            'banners' => $banQuery
         ]);
 
     }

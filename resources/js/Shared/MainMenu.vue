@@ -66,6 +66,19 @@
           </div>
         </div>
 
+        <div class="flex flex-col  pt-6 pb-3">
+          <div class="pb-5 text-xs font-semibold  tracking-[0.05em]  text-gray-500">Settings
+          </div>
+          <div class="space-y-2 py-1.5" >
+              <jet-nav-link class="group flex w-full items-center gap-2.5 rounded-md px-4
+                  py-2.5 text-md text-gray-300 text-start focus:text-primary hover:bg-gray-100 font-medium" :href="route('banner.index')" :active="route().current('banner.index')">
+                  <i class="pi pi-image flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"></i>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap">Banners</span>
+              </jet-nav-link>
+          </div>
+
+        </div>
+
    
    
   

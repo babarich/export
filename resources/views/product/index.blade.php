@@ -16,71 +16,34 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide flex items-center bg-no-repeat bg-cover bg-center min-h-[520px]"
-                        style="background-image: url(assets/images/banner-1.jpg);">
+                    @foreach ($banners as $banner)
+                        <div class="swiper-slide flex items-center bg-no-repeat bg-cover bg-center min-h-[520px]"
+                       style="background-image: url('{{ $banner->url }}');">
+
                         <div class="container">
                             <div class="lg:flex flex-wrap">
                                 <div class="w-full lg:w-1/2">
-                                    <div>
+                                   <div>
                                         <h1
-                                            class="text-[38px] md:text-[56px] lg:text-5xl xl:text-[56px] leading-[42px] md:leading-[64px] lg:leading-[48px] xl:leading-[64px] font-medium mb-2 sm:mb-4 text-secondary">
-                                            Best Collection For Home Decoration</h1>
-                                        <p class="text-secondary text-base mb-2 sm:mb-4">Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit. Vulputate rhoncus pellentesque
-                                            id
-                                            integer neque, vel accumsan dolor diam.</p>
+                                            class="text-[38px] md:text-[56px] lg:text-5xl xl:text-[56px] leading-[42px] md:leading-[64px] lg:leading-[48px] xl:leading-[64px] font-medium mb-2 sm:mb-4 text-gray-800">
+                                        Bring everyone together to get better products
+                                        </h1>
+                                        <p class="text-gray-700 text-base mb-2 sm:mb-4">
+                                            Mikese Export make it easy  for business and other customers to order and get their products within early as possible
+                                        </p>
                                         <div class="mt-[30px] md:mt-[40px]">
-                                            <a class="primary-btn py-2.5" href="#" tabindex="-1">SHOP NOW</a>
+                                            <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
+                                                rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    
 
-                    <div class="swiper-slide flex items-center bg-no-repeat bg-cover bg-center min-h-[520px]"
-                        style="background-image: url(assets/images/banner-2.jpg);">
-                        <div class="container">
-                            <div class="lg:flex flex-wrap">
-                                <div class="lg:w-1/2">
-                                    <div>
-                                        <h1
-                                            class="text-[38px] md:text-[56px] lg:text-5xl xl:text-[56px] leading-[42px] md:leading-[64px] lg:leading-[48px] xl:leading-[64px] font-medium mb-2 sm:mb-4 text-secondary">
-                                            Best Collection For Home Decoration</h1>
-                                        <p class="text-secondary text-base mb-2 sm:mb-4">Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit. Vulputate rhoncus pellentesque
-                                            id
-                                            integer neque, vel accumsan dolor diam.</p>
-                                        <div class="mt-[30px] md:mt-[40px]">
-                                            <a class="primary-btn py-2.5" href="#" tabindex="-1">SHOP NOW</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide flex items-center bg-no-repeat bg-cover bg-center min-h-[520px]"
-                        style="background-image: url(assets/images/banner-3.jpg);">
-                        <div class="container">
-                            <div class="lg:flex flex-wrap">
-                                <div class="lg:w-1/2">
-                                    <div>
-                                        <h1
-                                            class="text-[38px] md:text-[56px] lg:text-5xl xl:text-[56px] leading-[42px] md:leading-[64px] lg:leading-[48px] xl:leading-[64px] font-medium mb-2 sm:mb-4 text-secondary">
-                                            Best Collection For Home Decoration</h1>
-                                        <p class="text-secondary text-base mb-2 sm:mb-4">Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit. Vulputate rhoncus pellentesque
-                                            id
-                                            integer neque, vel accumsan dolor diam.</p>
-                                        <div class="mt-[30px] md:mt-[40px]">
-                                            <a class="primary-btn py-2.5" href="#" tabindex="-1">SHOP NOW</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- If we need navigation buttons -->
@@ -90,30 +53,8 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
             </div>
-      <!-- End here -->
-       <div
-        class="container flex flex-col-reverse items-center px-4 mx-auto mt-4 space-y-0 md:space-y-0 md:flex-row"
-      >
-        <!-- Left item -->
-        <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
-          <h1
-            class="max-w-md text-4xl font-bold text-center md:text-5xl md:text-left"
-          >
-            Bring everyone together to get better products
-          </h1>
-          <p class="max-w-sm text-center text-darkGrayishBlue md:text-left">
-            Mikese Export make it easy  for business and other customers to order and get their products within early as possible
-          </p>
-         <div class="mt-12">
-                <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
-                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
-            </div>
-        </div>
-        <!-- Image -->
-        <div class="md:w-1/2">
-          <img class="object-contain h-5/6" src="{{asset('assets/images/ecom.png')}}" alt="" />
-        </div>
-      </div>
+      <!-- End swiper -->
+    
     </section>
 
      

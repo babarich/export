@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -64,6 +65,16 @@ Route::group(['middleware' => 'auth', 'verified', 'admin'],function () {
         Route::post('update_item//quantity', 'updateQuantity')->name('updateQuantity');
         Route::put('update/product/{uuid}', 'update');
         Route::delete('delete/product/{uuid}', 'destroy');
+       });
+      });
+    });
+
+
+    Route::group(['prefix'=>'banners'], function(){
+      Route::name('banner.')->group(function(){
+       Route::controller(BannerController::class)->group(function(){
+       Route::get('index', 'index')->name('index');
+       Route::post('store', 'store')->name('store');
        });
       });
     });
