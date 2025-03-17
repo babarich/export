@@ -72,15 +72,7 @@
 
                 </div>
                 <!--/ Product Items -->
-            </template>
-            <template x-if="!cartItems.length">
-                <div class="text-center py-8 text-gray-500">
-                    You don't have any items in cart
-                </div>
-            </template>
-            
-
-            <div class="col-span-12 lg:col-span-3 border p-4">
+                <div class="col-span-12 lg:col-span-3 border p-4">
                 <div>
                     <h4 class="uppercase text-lg">Order Summary</h4>
                     <div class="space-y-2 border-b pb-3 mt-2">
@@ -102,7 +94,18 @@
                     </div>
                 </div>
             </div>
+            </template>
+            <template x-if="!cartItems.length">
+                <div class="text-center py-8 text-gray-500 col-span-12">
+                    You don't have any items in cart
+                </div>
+            </template>
+            
+
+            
         </div>
     </div>
+
+    
     
 </x-app-layout>

@@ -29,7 +29,7 @@ class CheckoutController extends Controller
             return redirect()->route('profile')->with('error', 'Please provide your address details first.');
         }
 
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+       
 
         [$products, $cartItems] = Cart::getProductsAndCartItems();
 
@@ -117,21 +117,19 @@ class CheckoutController extends Controller
         DB::commit();
         CartItem::where(['user_id' => $user->id])->delete();
 
-        return redirect($session->url);
+        return redirect()->to('/');
     }
 
     public function success(Request $request)
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+      
 
         try {
             $session_id = $request->get('session_id');
-            $session = \Stripe\Checkout\Session::retrieve($session_id);
-            if (!$session) {
-                return view('checkout.failure', ['message' => 'Invalid Session ID']);
-            }
+   
+            
 
             $payment = Payment::query()
                 ->where(['session_id' => $session_id])
@@ -143,7 +141,7 @@ class CheckoutController extends Controller
             if ($payment->status === PaymentStatus::Pending->value) {
                 $this->updateOrderAndSession($payment);
             }
-            $customer = \Stripe\Customer::retrieve($session->customer);
+          
 
             return view('checkout.success', compact('customer'));
         } catch (NotFoundHttpException $e) {
@@ -160,8 +158,7 @@ class CheckoutController extends Controller
 
     public function checkoutOrder(Order $order, Request $request)
     {
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
-
+      
         $lineItems = [];
         foreach ($order->items as $item) {
             $lineItems[] = [
@@ -177,14 +174,8 @@ class CheckoutController extends Controller
             ];
         }
 
-        $session = \Stripe\Checkout\Session::create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('checkout.success', [], true) . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout.failure', [], true),
-        ]);
-
-        $order->payment->session_id = $session->id;
+      
+      
         $order->payment->save();
 
 
@@ -193,31 +184,9 @@ class CheckoutController extends Controller
 
     public function webhook()
     {
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
-
-        $endpoint_secret = env('WEBHOOK_SECRET_KEY');
-
-        $payload = @file_get_contents('php://input');
-        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-        $event = null;
-
-        try {
-            $event = \Stripe\Webhook::constructEvent(
-                $payload, $sig_header, $endpoint_secret
-            );
-        } catch (\UnexpectedValueException $e) {
-            // Invalid payload
-            return response('', 401);
-        } catch (\Stripe\Exception\SignatureVerificationException $e) {
-            // Invalid signature
-            return response('', 402);
-        }
-
+        
         // Handle the event
-        switch ($event->type) {
-            case 'checkout.session.completed':
-                $paymentIntent = $event->data->object;
-                $sessionId = $paymentIntent['id'];
+       $sessionId = $paymentIntent['id'];
 
                 $payment = Payment::query()
                     ->where(['session_id' => $sessionId, 'status' => PaymentStatus::Pending])
@@ -225,10 +194,6 @@ class CheckoutController extends Controller
                 if ($payment) {
                     $this->updateOrderAndSession($payment);
                 }
-            // ... handle other event types
-            default:
-                echo 'Received unknown event type ' . $event->type;
-        }
 
         return response('', 200);
     }

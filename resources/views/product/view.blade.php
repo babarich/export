@@ -182,14 +182,42 @@ x-data="productItem({{ json_encode([
     <!-- description -->
     <div class="container pb-16 mt-4">
         <h3 class="border-b border-gray-200  text-gray-800 pb-3 font-medium">Product details</h3>
-        <div class="w-3/5 pt-6">
-            <div class="text-gray-600">
-                <p>{{$product->description}}</p>
-               
-            </div>
+        <div x-data="{activeTab: 'info'}" class="product_view_tabs">
+                <div class="flex gap-2 border-b mb-4">
+                    <div @click="activeTab='info'" :class="{'!border-primary !text-primary' : activeTab ==='info' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0 !border-primary !text-primary">
+                        Product Info</div>
+                    <div @click="activeTab='question'" :class="{'!border-primary !text-primary' : activeTab ==='question' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0">
+                        Question &amp; Answer</div>
+                    <div @click="activeTab='review'" :class="{'!border-primary !text-primary' : activeTab ==='review' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0">
+                        Review (10)</div>
+                </div>
+                 <div x-show="activeTab==='info'" class="max-w-[800px]" style="">
+                    <div class="w-3/5 pt-6">
+                                <div class="text-gray-600">
+                                    <p>{{$product->description}}</p>
+                                
+                                </div>
 
-           
-        </div>
+                            
+                            </div>
+                 </div>
+                 <div x-show="activeTab==='question'" class="mt-6" style="display: none;">
+                    <h4>Question about this product </h4>
+                        <div class="mt-6">
+                        <form>
+                            <textarea placeholder="Type your question" class="w-full p-5 border focus:border-primary focus:ring-0 rounded"></textarea>
+                            <button class="bg-primary border border-primary text-white px-8 py-3 font-medium 
+                                 rounded-md hover:bg-transparent hover:text-primary">Ask Question</button>
+                        </form>
+                    </div>
+                 </div>
+                 <div x-show="activeTab==='review'" class="mt-6" style="display: none;">
+
+
+                 </div>
+
+            </div>
+        
     </div>
 
      <!-- related product -->

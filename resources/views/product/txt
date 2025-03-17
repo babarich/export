@@ -1,0 +1,432 @@
+<div x-data="{activeTab: 'info'}" class="product_view_tabs mt-28">
+                <div class="flex gap-2 border-b mb-4">
+                    <div @click="activeTab='info'" :class="{'!border-primary !text-primary' : activeTab ==='info' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0 !border-primary !text-primary">
+                        Product Info</div>
+                    <div @click="activeTab='question'" :class="{'!border-primary !text-primary' : activeTab ==='question' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0">
+                        Question &amp; Answer</div>
+                    <div @click="activeTab='review'" :class="{'!border-primary !text-primary' : activeTab ==='review' }" class="border px-1 sm:px-4 py-2 rounded text-xs sm:text-base cursor-pointer rounded-b-none border-[#2B2D42] border-b-0">
+                        Review (10)</div>
+                </div>
+                <!-- product info -->
+                <div x-show="activeTab==='info'" class="max-w-[800px]" style="">
+                    <div class="pbt_info_text">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nec condimentum lorem
+                            lacus. Lectus
+                            libero in vulputate quis massa nisl risus, libero ut. Morbi praesent ipsum sed morbi
+                            turpis sed.
+                            Amet
+                            sed fames fermentum, augue dignissim. Montes, velit velit eu gravida nibh in
+                            feugiat.
+                        </p>
+                        <p class="mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nec condimentum
+                            lorem
+                            lacus.
+                            Lectus
+                            libero in vulputate quis massa nisl risus, libero ut. Morbi praesent ipsum sed morbi
+                            turpis sed.
+                            Amet
+                            sed fames fermentum, augue dignissim. Montes, velit velit eu gravida nibh in
+                            feugiat.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex border">
+                        <div class="w-[190px]  border-r">
+                            <p class="border-b px-4 py-3">Color</p>
+                            <p class="border-b px-4 py-3">Material</p>
+                            <p class="px-4 py-2">Weight</p>
+
+                        </div>
+                        <div class="w-full">
+                            <p class="border-b px-4 py-3">Black, Brown, Red</p>
+                            <p class="border-b px-4 py-3">Artificial Leather</p>
+                            <p class="px-4 py-2">0.5kg</p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- question & answer -->
+                <div x-show="activeTab==='question'" class="mt-6" style="display: none;">
+                    <h4>Question about this product (3)</h4>
+                    <div class="mt-6 border-b pb-5">
+                        <div class="flex items-center gap-4">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M230.2 213a118.3 118.3 0 0 0-70.5-54.6a70 70 0 1 0-63.4 0A118.3 118.3 0 0 0 25.8 213a5.9 5.9 0 0 0 2.2 8.2a6 6 0 0 0 8.2-2.2a106 106 0 0 1 183.6 0a6 6 0 0 0 5.2 3a6.4 6.4 0 0 0 3-.8a5.9 5.9 0 0 0 2.2-8.2ZM70 96a58 58 0 1 1 58 58a58 58 0 0 1-58-58Z"></path>
+                                </svg>
+                            </div>
+                            <div class="pbqna_content">
+                                <h5>Any discount?</h5>
+                                <p class="text-sm">Dr.SaifuzZ. - 27 Oct 2021</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-2">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M32 128v56a16 16 0 0 0 16 16h16a16 16 0 0 0 16-16v-40a16 16 0 0 0-16-16Zm193.5 0h-32a16 16 0 0 0-16 16v40a16 16 0 0 0 16 16h16a16 16 0 0 0 16-16Z" opacity=".2"></path>
+                                    <path fill="currentColor" d="M202.7 54.2A103.1 103.1 0 0 0 129.5 24H128A104 104 0 0 0 24 128v56a24.1 24.1 0 0 0 24 24h16a24.1 24.1 0 0 0 24-24v-40a24.1 24.1 0 0 0-24-24H40.4a87.8 87.8 0 0 1 88.3-80h.1a88 88 0 0 1 88.3 80h-23.6a24 24 0 0 0-24 24v40a24 24 0 0 0 24 24h16a23.6 23.6 0 0 0 8-1.4v1.4a24.1 24.1 0 0 1-24 24H136a8 8 0 0 0 0 16h57.5a40.1 40.1 0 0 0 40-40v-80a103.5 103.5 0 0 0-30.8-73.8ZM64 136a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8v-48Zm145.5 56h-16a8 8 0 0 1-8-8v-40a8 8 0 0 1 8-8h24v48a8 8 0 0 1-8 8Z"></path>
+                                </svg>
+                            </div>
+                            <div class="pbqna_content">
+                                <h5>There is no discount sir</h5>
+                                <p>Store Admin - 27 Oct 2021</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 border-b pb-5">
+                        <div class="flex items-center gap-4">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M230.2 213a118.3 118.3 0 0 0-70.5-54.6a70 70 0 1 0-63.4 0A118.3 118.3 0 0 0 25.8 213a5.9 5.9 0 0 0 2.2 8.2a6 6 0 0 0 8.2-2.2a106 106 0 0 1 183.6 0a6 6 0 0 0 5.2 3a6.4 6.4 0 0 0 3-.8a5.9 5.9 0 0 0 2.2-8.2ZM70 96a58 58 0 1 1 58 58a58 58 0 0 1-58-58Z"></path>
+                                </svg>
+                            </div>
+                            <div class="pbqna_content">
+                                <h5>Any discount?</h5>
+                                <p class="text-sm">Dr.SaifuzZ. - 27 Oct 2021</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mt-2">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M32 128v56a16 16 0 0 0 16 16h16a16 16 0 0 0 16-16v-40a16 16 0 0 0-16-16Zm193.5 0h-32a16 16 0 0 0-16 16v40a16 16 0 0 0 16 16h16a16 16 0 0 0 16-16Z" opacity=".2"></path>
+                                    <path fill="currentColor" d="M202.7 54.2A103.1 103.1 0 0 0 129.5 24H128A104 104 0 0 0 24 128v56a24.1 24.1 0 0 0 24 24h16a24.1 24.1 0 0 0 24-24v-40a24.1 24.1 0 0 0-24-24H40.4a87.8 87.8 0 0 1 88.3-80h.1a88 88 0 0 1 88.3 80h-23.6a24 24 0 0 0-24 24v40a24 24 0 0 0 24 24h16a23.6 23.6 0 0 0 8-1.4v1.4a24.1 24.1 0 0 1-24 24H136a8 8 0 0 0 0 16h57.5a40.1 40.1 0 0 0 40-40v-80a103.5 103.5 0 0 0-30.8-73.8ZM64 136a8 8 0 0 1 8 8v40a8 8 0 0 1-8 8H48a8 8 0 0 1-8-8v-48Zm145.5 56h-16a8 8 0 0 1-8-8v-40a8 8 0 0 1 8-8h24v48a8 8 0 0 1-8 8Z"></path>
+                                </svg>
+                            </div>
+                            <div class="pbqna_content">
+                                <h5>There is no discount sir</h5>
+                                <p>Store Admin - 27 Oct 2021</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-6">
+                        <form>
+                            <textarea placeholder="Type your question" class="w-full p-5 border focus:border-primary focus:ring-0 rounded"></textarea>
+                            <button class="default_btn mt-6">Ask Question</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- reviews -->
+                <div x-show="activeTab==='review'" class="mt-6" style="display: none;">
+                    <div class="sm:flex gap-5">
+                        <div class="total_rating">
+                            <div class="trating_number">
+                                <span class="text-3xl">4.9</span>
+                                <span class="text-3xl">/5</span>
+                            </div>
+                            <!-- rating -->
+                            <div class="flex mt-2">
+                                <span class="text-[#F6BC3E]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-[#F6BC3E]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-[#F6BC3E]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-[#F6BC3E]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-[#F6BC3E]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="text-sm mt-2">20 Ratings</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <!-- rating -->
+                                <div class="flex">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="w-[150px] h-[8px] bg-[#EFF0F5] relative after:absolute after:w-[70%] after:h-[8px] after:bg-[#FACA51]">
+                                </p>
+                                <p>18</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- rating -->
+                                <div class="flex">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="w-[150px] h-[8px] bg-[#EFF0F5] relative after:absolute after:w-[20%] after:h-[8px] after:bg-[#FACA51]">
+                                </p>
+                                <p>2</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- rating -->
+                                <div class="flex">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <p class="w-[150px] h-[8px] bg-[#EFF0F5] relative after:absolute after:w-[20%] after:h-[8px] after:bg-[#FACA51]">
+                                </p>
+                                <p>2</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- rating -->
+                                <div class="flex">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <p class="w-[150px] h-[8px] bg-[#EFF0F5] relative after:absolute after:w-[20%] after:h-[8px] after:bg-[#FACA51]">
+                                </p>
+                                <p>2</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <!-- rating -->
+                                <div class="flex">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <p class="w-[150px] h-[8px] bg-[#EFF0F5]">
+                                </p>
+                                <p>0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-8 sm:gap-40 md:justify-between items-center mt-6">
+                        <p class="m-0 text-semibold">Product Reviews</p>
+                        <div class="review_filters">
+                            <select class="nice-select" style="display: none;">
+                                <option value="">Sort by</option>
+                                <option value="">Price low-high</option>
+                                <option value="">Price high-low</option>
+                            </select><div class="nice-select" tabindex="0">
+  <span class="current">Select an option</span>
+  <div class="nice-select-dropdown">
+  
+  <ul class="list"><li data-value="" class="option null">Sort by</li><li data-value="" class="option null">Price low-high</li><li data-value="" class="option null">Price high-low</li></ul>
+  </div></div>
+
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex gap-5 border-b pb-5">
+                            <div>
+                                <img loading="lazy" src="assets/images/avatar.png" alt="user">
+                            </div>
+                            <!-- content -->
+                            <div>
+                                <h5>by Sadat A.</h5>
+                                <!-- rating -->
+                                <div class="flex mt-2">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="text-xs mt-2">30 Jul 2021</div>
+                                <p class="mt-2">Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean
+                                    sollicitudin, lorem
+                                    quis bibendum auctor, nisi elit consequat ipsum, nec
+                                    sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
+                                <div class="flex gap-2 mt-4">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-5 mt-6">
+                            <div>
+                                <img loading="lazy" src="assets/images/avatar.png" alt="user">
+                            </div>
+                            <!-- review content -->
+                            <div>
+                                <h5>by Sadat A.</h5>
+                                <!-- rating -->
+                                <div class="flex mt-2">
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="text-[#F6BC3E]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28L12 15.4z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="text-xs mt-2">30 Jul 2021</div>
+                                <p class="mt-2">Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean
+                                    sollicitudin, lorem
+                                    quis bibendum auctor, nisi elit consequat ipsum, nec
+                                    sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
+                                <div class="flex gap-2 mt-4">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                    <img class="w-[70px] h-[55px] border border-[#A39E9E] rounded" src="assets/images/product.png" alt="review">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
