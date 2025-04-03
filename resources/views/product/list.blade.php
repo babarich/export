@@ -316,18 +316,8 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                             </div>
 
             
-                            <div id="load-more-container" style="text-align: center; margin-top: 20px;">
-                @if ($products->nextPageUrl())
-                    <button id="load-more" data-next-page="{{ $products->nextPageUrl() }}"
-                        class="inline-flex items-center justify-center shrink-0  
-                            leading-none rounded outline-none transition duration-300 ease-in-out focus:outline-0 focus:shadow 
-                            ocus:ring-1 focus:ring-blue-600 bg-primary text-white border border-transparent hover:bg-blue-600 px-5 py-0 
-                            h-12 text-sm font-semibold  md:text-base"
-                        style="padding: 10px 20px; font-size: 16px;">Load More Products</button>
-                @endif
-            </div>
 
-        {{-- {{$products->appends(['sort' => request('sort'), 'search' => request('search')])->links()}} --}}
+        {{$products->appends(['sort' => request('sort'), 'search' => request('search')])->links('vendor.pagination.tailwind')}}
 </div>
 </div>
     <?php endif; ?>
@@ -350,80 +340,11 @@ $categoryList = \App\Models\Category::getActiveAsTree();
     
     $(document).ready(function() {
 
-        document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".category-item").forEach(label => {
-            label.addEventListener("click", function () {
-                this.querySelector(".category-radio").checked = true;
-                let categoryId = this.querySelector(".category-radio").value;
-                window.location.href = "{{ route('byCategory', '') }}/" + categoryId;
-            });
-        });
+    
     });
 
 
-        $('#load-more').click(function() {
-            let nextPageUrl = $(this).data('next-page');
-            if (!nextPageUrl) return;
-
-            $.get(nextPageUrl, function(response) {
-                if (response.products.length > 0) {
-                    response.products.forEach(product => {
-                        $('#product-list').append(`
-            <article class="h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all
-            duration-200 hover:-translate-y-0.5 hover:shadow"
-                x-data="productItem({{ json_encode([
-                                    'id' => $product->id,
-                                    'slug' => $product->slug,
-                                    'image' => $product->image ?: '/img/noimage.png',
-                                    'title' => $product->title,
-                                    'price' => $product->price,
-                                    'addToCartUrl' => route('cart.add', $product)
-                                ]) }})">
-                                            <div
-                                    class="relative flex h-48 w-auto cursor-pointer items-center justify-center sm:h-64">
-                                    <span class="sr-only">Product Image</span>
-                                      <a href="{{ route('product.view', $product->slug) }}"
-                                     class="aspect-w-3 aspect-h-2 block overflow-hidden">
-                                    <img alt="Razero Wolverine"
-                                     class="object-cover rounded-lg hover:scale-105 hover:rotate-1 transition-transform"
-                                        :src="product.image"
-                                        style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
-                                      </a>
-                                </div>
-                                <header class="p-3 md:p-6">
-                                    <div class="mb-2 flex items-center"><span
-                                            class="text-sm font-semibold text-heading md:text-base">${product->price}</span></div>
-                                    <h3 class="mb-4 cursor-pointer truncate text-xs text-body md:text-sm">${product->title}</h3>
-                                    <div><button
-                                          @click="addToCart()"
-                                            class="group flex h-7 w-full items-center justify-between rounded bg-gray-100 
-                                            text-xs text-body-dark transition-colors hover:border-accent hover:bg-primary hover:text-white 
-                                            focus:border-accent focus:bg-primary focus:text-white focus:outline-0 md:h-9 md:text-sm"><span
-                                                class="flex-1">Add to cart</span>
-                                                <span class="grid h-7 w-7 place-items-center bg-gray-200 transition-colors
-                                                duration-200 group-hover:bg-primary group-focus:bg-primary
-                                                ltr:rounded-tr ltr:rounded-br rtl:rounded-tl rtl:rounded-bl md:h-9 md:w-9">
-                                                <i class="fa-solid fa-plus h-4 w-4 stroke-2"></i>
-                                                
-                                                </span>
-                                                </button>
-                                                </div>
-                                </header>
-                            </article>
-
-                        `);
-                    });
-
-                    
-                    if (response.next_page_url) {
-                        $('#load-more').data('next-page', response.next_page_url);
-                    } else {
-                        $('#load-more').hide();
-                    }
-                }
-            });
-        });
-    });
+  
 </script>
 
 @endsection

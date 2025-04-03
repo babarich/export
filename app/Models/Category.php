@@ -14,7 +14,10 @@ class Category extends Model
     use HasSlug;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'slug', 'active', 'parent_id', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'slug', 'active', 'parent_id', 'created_by', 'updated_by','path',
+        'url',
+        'mime',
+        'size',];
 
     public function getSlugOptions(): SlugOptions
     {

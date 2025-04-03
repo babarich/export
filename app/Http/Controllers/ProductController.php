@@ -6,8 +6,11 @@ use App\Http\Resources\BannerResource;
 use App\Models\BannerImage;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Question\Question;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -27,6 +30,7 @@ class ProductController extends Controller
 
     public function byCategory(Category $category)
     {
+     
         $categories = Category::getAllChildrenByParent($category);
 
         $query = Product::query()
@@ -34,7 +38,10 @@ class ProductController extends Controller
             ->join('product_categories AS pc', 'pc.product_id', 'products.id')
             ->whereIn('pc.category_id', array_map(fn($c) => $c->id, $categories));
 
-        return $this->renderProducts($query);
+           return $this->getProducts($query);      
+          
+
+        
     }
 
     public function view(Product $product)
@@ -46,11 +53,14 @@ class ProductController extends Controller
         ->inRandomOrder()
         ->take(4)
         ->get();
+
+        $questions = Question::query()->where('product_id', $product->id)->get();
         
 
         return view('product.view', [
             'product' =>  $product,
-            'products' => $products
+            'products' => $products,
+            'questions' => $questions
         ]);
     }
 
@@ -77,11 +87,12 @@ class ProductController extends Controller
             })->paginate(8);
 
             $banQuery= BannerImage::query()->limit(3)->get();
-           
+             $cats = Category::query()->orderBy('updated_at', 'desc')->limit(6)->get();
 
         return view('product.index', [
             'products' => $products,
-            'banners' => $banQuery
+            'banners' => $banQuery,
+            'cats' => $cats
         ]);
 
     }
@@ -109,7 +120,7 @@ class ProductController extends Controller
                     ->orWhere('products.description', 'like', "%$search%");
             })->paginate(10);
 
-         
+        
 
         return view('product.list', [
             'products' => $products

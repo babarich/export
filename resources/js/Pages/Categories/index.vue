@@ -7,7 +7,7 @@
         </div>
         <div>
             <NButton @click="showModal()">
-            <PlusIcon class="w-4 h-4  mr-2"/>  Add Category
+                 <PlusIcon class="w-4 h-4  mr-2"/>  Add Category
             </NButton>
           
         </div>
@@ -46,7 +46,17 @@
                 scope="col"
                 class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
                    Name
-                </th>     
+                </th>    
+                <th
+                scope="col"
+                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
+                   Banner
+                </th>  
+                <th
+                scope="col"
+                class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
+                   Created At
+                </th>   
                <th
                 scope="col"
                 class="py-4 px-4 border text-xs text-left whitespacenowrap font-semibold">
@@ -63,6 +73,14 @@
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
                     {{cat.name}}
+                  </td>
+                   <td class="py-4 px-4 text-sm text-left border">
+                     <img v-if="cat.url" class="w-16 h-16 object-cover" :src="cat.url" :alt="cat.namr">
+                     <img v-else class="w-16 h-16 object-cover" src="/assets/images/empty.svg">
+                   
+                  </td>
+                   <td class="py-4 px-4 text-sm text-left border">
+                    {{cat.created_at}}
                   </td>
                   <td class="py-4 px-4 text-sm text-left border">
                      edit
@@ -128,7 +146,10 @@
                     <CustomInput class="mb-2" label="Category Name" v-model="category.name"/>
                     <span class="text-sm text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
                   </div>
-                  
+                  <div>   
+                    <CustomInput type="file"  class="mb-2" label="Category Banner" @change="file => category.image = file" />
+                    <span class="text-sm text-red-500" v-if="errors.image">{{errors.image[0]}}</span>
+                  </div>
                  <div class="mt-4">
                     <CustomInput type='checkbox' class="mb-2" label="Category Status" v-model="category.active"/>
                     <span class="text-sm text-red-500" v-if="errors.active">{{errors.active[0]}}</span>
@@ -177,7 +198,8 @@ const show = ref(false)
 
 const category = useForm({
   name: null,
-  active:false
+  active:false,
+  image:null
 })
 
 const errors = ref({})

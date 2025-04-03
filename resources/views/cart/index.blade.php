@@ -1,4 +1,12 @@
+<?php
+/** @var \Illuminate\Database\Eloquent\Collection $products */
+$categoryList = \App\Models\Category::getActiveAsTree();
+
+?>
+
 <x-app-layout>
+
+ <x-category-list :category-list="$categoryList" class="-ml-5 -mt-5 -mr-5 px-4"/>
     <div class="container pb-10">
         <h1 class="text-3xl font-bold mb-6">Your Cart Items</h1>
         
@@ -72,13 +80,27 @@
 
                 </div>
                 <!--/ Product Items -->
-                <div class="col-span-12 lg:col-span-3 border p-4">
+                
+            </div>
+            </template>
+            <template x-if="!cartItems.length">
+                <div class="text-center py-8 text-gray-500 col-span-12">
+                    You don't have any items in cart
+                </div>
+            </template>
+            
+   
+            <div class="col-span-12 lg:col-span-3 border p-4" x-if="cartItems.length">
                 <div>
                     <h4 class="uppercase text-lg">Order Summary</h4>
                     <div class="space-y-2 border-b pb-3 mt-2">
                         <div class="flex justify-between">
                             <p class="font-medium">Subtotal</p>
                             <span id="cartTotal" class="text-xl" x-text="`${cartTotal}`"></span>
+                        </div>
+                         <div class="flex justify-between">
+                            <p class="font-medium">Delivery</p>
+                            <span class="text-xl">Free</span>
                         </div>
                         
                     </div>
@@ -93,15 +115,6 @@
 
                     </div>
                 </div>
-            </div>
-            </template>
-            <template x-if="!cartItems.length">
-                <div class="text-center py-8 text-gray-500 col-span-12">
-                    You don't have any items in cart
-                </div>
-            </template>
-            
-
             
         </div>
     </div>

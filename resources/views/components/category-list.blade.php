@@ -25,7 +25,8 @@
                 </a>
                 <!-- If category has children, display nested dropdown -->
                 @if(!empty($category->children))
-                    <x-category-list class="absolute left-0 top-[100%] z-50 hidden flex-col" :category-list="$category->children"/>
+                    <x-category-list class="absolute left-0 top-[100%] z-50 hidden flex-col"
+                     :category-list="$category->children"/>
                 @endif
             </div>
             @endforeach
@@ -55,7 +56,7 @@
                     </li>
                     
                     <!-- contact -->
-                    <li><a href="contact.html"
+                    <li><a href="{{route('page.contact')}}"
                             class="text-white leading-[26px] flex items-center text-base font-medium px-2.5 py-[15px] transition duration-300">Contact</a>
                     </li>
                 </ul>

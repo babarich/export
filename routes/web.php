@@ -6,9 +6,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -29,6 +31,28 @@ Route::middleware(['guestOrVerified'])->group(function () {
         Route::post('/add/{product:slug}', [CartController::class, 'add'])->name('add');
         Route::post('/remove/{product:slug}', [CartController::class, 'remove'])->name('remove');
         Route::post('/update-quantity/{product:slug}', [CartController::class, 'updateQuantity'])->name('update-quantity');
+    });
+     Route::group(['prefix'=>'pages'], function(){
+      Route::name('page.')->group(function(){
+       Route::controller(PageController::class)->group(function(){
+       Route::get('contact', 'contact')->name('contact');
+       Route::get('about', 'about')->name('about');
+       Route::get('term', 'term')->name('term');
+       Route::get('faq', 'faq')->name('faq');
+       Route::get('privacy', 'privacy')->name('privacy');
+   
+       });
+      });
+    });
+
+     Route::group(['prefix'=>'questions'], function(){
+      Route::name('question.')->group(function(){
+       Route::controller(QuestionController::class)->group(function(){
+       Route::post('store_question/{id?}', 'store')->name('store');
+
+   
+       });
+      });
     });
 });
 
@@ -79,6 +103,8 @@ Route::group(['middleware' => 'auth', 'verified', 'admin'],function () {
        });
       });
     });
+
+     
 
     //user
     // Route::get('user/info', [\App\Http\Controllers\UserController::class, 'userinfo']);

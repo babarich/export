@@ -204,8 +204,24 @@ x-data="productItem({{ json_encode([
                  <div x-show="activeTab==='question'" class="mt-6" style="display: none;">
                     <h4>Question about this product </h4>
                         <div class="mt-6">
-                        <form>
-                            <textarea placeholder="Type your question" class="w-full p-5 border focus:border-primary focus:ring-0 rounded"></textarea>
+                            @foreach ($questions as $question)
+                               <div class="flex items-center gap-4 mb-6 border-b pb-5">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M230.2 213a118.3 118.3 0 0 0-70.5-54.6a70 70 0 1 0-63.4 0A118.3 118.3 0 0 0 25.8 213a5.9 5.9 0 0 0 2.2 8.2a6 6 0 0 0 8.2-2.2a106 106 0 0 1 183.6 0a6 6 0 0 0 5.2 3a6.4 6.4 0 0 0 3-.8a5.9 5.9 0 0 0 2.2-8.2ZM70 96a58 58 0 1 1 58 58a58 58 0 0 1-58-58Z"></path>
+                                </svg>
+                            </div>
+                            <div class="pbqna_content">
+                                <h5>{{$question->question}}</h5>
+                                <p class="text-sm">{{$question->name  }}. - {{\Carbon\Carbon::parse($question->created_at)->format('d M Y')}}</p>
+                            </div>
+                        </div> 
+                            @endforeach
+                            
+                        <form action="{{route('question.store', $product->id)  }}" method="POST">
+                            @csrf
+                            <input class="w-full md:w-1/2 mb-3 p-3 border focus:border-primary focus:ring-0 rounded" name="name" required placeholder="Enter Name" />
+                            <textarea placeholder="Type your question" name="question" class="w-full md:w-1/2 p-5 border focus:border-primary focus:ring-0 rounded" required></textarea><br/>
                             <button class="bg-primary border border-primary text-white px-8 py-3 font-medium 
                                  rounded-md hover:bg-transparent hover:text-primary">Ask Question</button>
                         </form>

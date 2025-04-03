@@ -10,6 +10,9 @@ use App\Http\Resources\CategoryTreeResource;
 use App\Models\Category;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -42,10 +45,31 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        
         $data = $request->validated();
         try{
         $data['created_by'] = $request->user()->id;
         $data['updated_by'] = $request->user()->id;
+        if($request->hasFile('image')){
+                $image = $request->file('image');
+            $disk = Storage::disk('public');
+            $path = 'images/' . Str::random();
+            if (!$disk->exists($path)) {
+                $disk->makeDirectory($path, 0755, true);
+            }
+            $name = Str::random() . '.' . $image->getClientOriginalExtension();
+            if (!$disk->putFileAs($path, $image, $name)) {
+                throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
+            }
+            $relativePath = $path . '/' . $name;
+            $url = URL::to(Storage::url($relativePath));
+            $data['url'] = $url;
+            $data['path'] = $relativePath;
+            $data['mime'] = $image->getClientMimeType();
+            $data['size'] = $image->getSize();
+        }
+        
+       
         $category = Category::create($data);
 
         }catch (\Exception $e){
@@ -65,6 +89,26 @@ class CategoryController extends Controller
          try{
             $data = $request->validated();
             $data['updated_by'] = $request->user()->id;
+             if($request->hasFile('image')){
+                $image = $request->file('image');
+                $disk = Storage::disk('public');
+                $path = 'images/' . Str::random();
+                if (!$disk->exists($path)) {
+                    $disk->makeDirectory($path, 0755, true);
+                }
+                $name = Str::random() . '.' . $image->getClientOriginalExtension();
+                if (!$disk->putFileAs($path, $image, $name)) {
+                    throw new \Exception("Unable to save file \"{$image->getClientOriginalName()}\"");
+                }
+                $relativePath = $path . '/' . $name;
+                $url = URL::to(Storage::url($relativePath));
+                $data['url'] = $url;
+                $data['path'] = $relativePath;
+                $data['mime'] = $image->getClientMimeType();
+                $data['size'] = $image->getSize();
+        }
+        
+       
             $category->update($data);
 
         }catch (\Exception $e){

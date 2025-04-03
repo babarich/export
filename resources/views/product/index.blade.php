@@ -32,7 +32,7 @@ $categoryList = \App\Models\Category::getActiveAsTree();
                                             Mikese Export make it easy  for business and other customers to order and get their products within early as possible
                                         </p>
                                         <div class="mt-[30px] md:mt-[40px]">
-                                            <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
+                                            <a href="{{route('product.list')  }}" class="bg-primary border border-primary text-white px-8 py-3 font-medium 
                                                 rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
                                         </div>
                                     </div>
@@ -84,6 +84,34 @@ $categoryList = \App\Models\Category::getActiveAsTree();
         </div>
     </div>
     
+
+    <div class="container pb-14">
+        <h2 class="text-[28px] text-primary font-semibold mb-6">SHOP BY CATEGORY</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
+            @foreach ($cats as $cat)
+                <div class="col-span-1 overflow-hidden">
+                <a href="{{ route('byCategory', $cat) }}"
+                    class="group h-[150px] sm:h-[250px] flex items-center justify-center relative bg-cover bg-no-repeat 
+                    bg-center after:absolute after:inset-0 after:bg-[#00000060] after:content-['']"
+                    style="background-image: url({{ $cat->url }});">
+                    <div class="flex items-center relative z-10">
+                        <h4 class="text-xl leading-6 text-white font-medium">{{$cat->name}}</h4>
+                        <div
+                            class="text-white opacity-0 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M13.3 17.275q-.3-.3-.288-.725q.013-.425.313-.725L16.15 13H5q-.425 0-.713-.288Q4 12.425 4 12t.287-.713Q4.575 11 5 11h11.15L13.3 8.15q-.3-.3-.3-.713q0-.412.3-.712t.713-.3q.412 0 .712.3L19.3 11.3q.15.15.213.325q.062.175.062.375t-.062.375q-.063.175-.213.325l-4.6 4.6q-.275.275-.687.275q-.413 0-.713-.3Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+            
+
+           
+        </div>
+    </div>
 
     <section class="w-11/12 container">
         <div class="flex flex-col md:w-1/2">

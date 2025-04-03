@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,15 +17,13 @@ class StoreCategoryRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'parent_id' => ['nullable', 'exists:categories,id'],
-            'image' => ['nullable'],
-            'active' => ['required', 'boolean']
+            'name' => ['required', 'string', 'max:255'],
+            'question' => ['required', 'string']
         ];
     }
 }
